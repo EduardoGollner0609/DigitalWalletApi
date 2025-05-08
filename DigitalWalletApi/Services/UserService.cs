@@ -2,7 +2,6 @@
 using DigitalWalletApi.DTOs.Entities;
 using DigitalWalletApi.Infra.Repositories.Abstractions;
 using DigitalWalletApi.Services.Exceptions;
-using Microsoft.EntityFrameworkCore;
 
 namespace DigitalWalletApi.Services
 {

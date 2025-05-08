@@ -8,11 +8,11 @@ namespace DigitalWalletApi.DTOs.Entities
         [Required(ErrorMessage = "É necessário informar quem está realizando a transação.")]
         public Guid SenderId { get; set; }
 
-        public User? Sender { get; set; }
+        public UserDTO? Sender { get; set; }
 
         [Required(ErrorMessage = "É necessário informar quem está recebendo a transação.")]
         public Guid ReceiverId { get; set; }
-        public User? Receiver { get; set; }
+        public UserDTO? Receiver { get; set; }
 
         [Required(ErrorMessage = "O valor deve ser informado.")]
         public decimal Amount { get; private set; }
@@ -27,6 +27,16 @@ namespace DigitalWalletApi.DTOs.Entities
             ReceiverId = receiverId;
             Moment = DateTime.UtcNow;
             Amount = amount;
+        }
+
+        public TransferDTO(Transfer transfer)
+        {
+            SenderId = transfer.SenderId;
+            ReceiverId = transfer.ReceiverId;
+            Moment = transfer.Moment;
+            Amount = transfer.Amount;
+            Sender = new UserDTO(transfer.Sender);
+            Receiver = new UserDTO(transfer.Receiver);
         }
     }
 }

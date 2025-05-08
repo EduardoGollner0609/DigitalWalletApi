@@ -21,7 +21,7 @@ namespace DigitalWalletApi.DTOs.Entities
         public string Password { get; private set; }
         public decimal Balance { get; private set; }
 
-        public List<Transfer> Transfers { get; private set; } = new List<Transfer>();
+        public List<TransferDTO> Transfers { get; private set; } = new List<TransferDTO>();
 
         public UserDTO(string firstName, string lastName, string email, string password, decimal balance)
         {
@@ -30,6 +30,19 @@ namespace DigitalWalletApi.DTOs.Entities
             Email = email;
             Password = password;
             Balance = balance;
+        }
+
+        public UserDTO(User user)
+        {
+            FirstName = user.FirstName;
+            LastName = user.LastName;
+            Email = user.Email;
+            Password = user.Password;
+            Balance = user.Balance;
+            user.Transfers.ForEach(transfer =>
+            {
+                new TransferDTO(transfer);
+            });
         }
     }
 }
