@@ -2,7 +2,7 @@
 using DigitalWalletApi.Domain.Entities;
 using DigitalWalletApi.Infra.Repositories.Abstractions;
 
-namespace DigitalWalletApi.Infra.Repositories
+namespace DigitalWalletApi.Infra.Repositories.Implementation
 {
     public class UserRepository : IUserRepository
     {
