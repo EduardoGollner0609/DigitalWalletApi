@@ -1,6 +1,7 @@
 ﻿using DigitalWalletApi.Data;
 using DigitalWalletApi.Domain.Entities;
 using DigitalWalletApi.Infra.Repositories.Abstractions;
+using Microsoft.EntityFrameworkCore;
 
 namespace DigitalWalletApi.Infra.Repositories.Implementation
 {
@@ -13,19 +14,22 @@ namespace DigitalWalletApi.Infra.Repositories.Implementation
             _context = context;
         }
 
-        public Task<User> CreateAsync(Task entity)
+        public async Task<User> CreateAsync(User entity)
         {
-            throw new NotImplementedException();
+            await _context.Users.AddAsync(entity);
+            await _context.SaveChangesAsync();
+            return entity;
         }
 
-        public Task<ICollection<User>> FindAll()
+        public async Task<ICollection<User>> FindAll()
         {
-            throw new NotImplementedException();
+            return await _context.Users.ToListAsync();
         }
 
-        public Task<User> FindById(Guid id)
+        public async Task<User> FindById(Guid id)
         {
-            throw new NotImplementedException();
+            return await _context.Users
+                .FirstOrDefaultAsync(u => u.Id == id);
         }
     }
 }
