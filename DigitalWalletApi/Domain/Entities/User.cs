@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using DigitalWalletApi.Domain.Abstractions;
+﻿using DigitalWalletApi.Domain.Abstractions;
 
 namespace DigitalWalletApi.Domain.Entities
 {

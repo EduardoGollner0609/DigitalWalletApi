@@ -26,6 +26,14 @@ namespace DigitalWalletApi.Infra.Repositories.Implementation
             return await _context.Users.ToListAsync();
         }
 
+        public async Task<User> FindByEmailAsync(string email)
+        {
+            return await _context.Users
+               .FirstOrDefaultAsync(
+                u => string.Equals(u.Email, email, StringComparison.CurrentCultureIgnoreCase)
+                );
+        }
+
         public async Task<User> FindByIdAsync(Guid id)
         {
             return await _context.Users

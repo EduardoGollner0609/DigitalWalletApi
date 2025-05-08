@@ -35,6 +35,15 @@ namespace DigitalWalletApi.Services
                 : user;
         }
 
+        public async Task<User> FindByEmailAsync(string email)
+        {
+            User user = await _repository.FindByEmailAsync(email);
+
+            return user == null
+                ? throw new ResourceNotFoundException($"Usuário do email {email} não foi encontrado!")
+                : user;
+        }
+
         private User InstantiateUserByDTO(UserDTO dto)
         {
             return new User(dto.FirstName,
