@@ -36,7 +36,7 @@ namespace DigitalWalletApi.Services
             }
             catch (ResourceNotFoundException e)
             {
-                throw new ResourceNotFoundException(e.Message);
+                throw new UnauthorizedAccessException("Credenciais inválidas.");
             }
         }
     }
