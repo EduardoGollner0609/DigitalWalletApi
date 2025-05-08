@@ -1,7 +1,10 @@
+using DigitalWalletApi.DTOs.Abstractions;
+using DigitalWalletApi.DTOs.Entities;
 using DigitalWalletApi.Infra;
 using DigitalWalletApi.Infra.Repositories.Abstractions;
 using DigitalWalletApi.Infra.Repositories.Implementation;
 using DigitalWalletApi.Services;
+using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 
 
@@ -25,6 +28,7 @@ namespace DigitalWalletApi
             builder.Services.AddScoped<ITransferRepository, TransferRepository>();
             builder.Services.AddScoped<UserService>();
             builder.Services.AddScoped<AuthService>();
+            builder.Services.AddScoped<PasswordHasher<UserDTO>>();
 
             var app = builder.Build();
 

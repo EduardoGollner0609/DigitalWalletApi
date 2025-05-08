@@ -1,4 +1,4 @@
-﻿using DigitalWalletApi.Domain.Entities;
+﻿using DigitalWalletApi.DTOs.Entities;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -8,7 +8,7 @@ namespace DigitalWalletApi.Services
 {
     public static class TokenService
     {
-        public static string GeneratedToken(User user)
+        public static string GeneratedToken(UserDTO user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(Settings.Secret);

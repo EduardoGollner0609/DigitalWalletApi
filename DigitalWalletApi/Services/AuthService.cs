@@ -1,25 +1,29 @@
-﻿using DigitalWalletApi.Domain.Entities;
-using DigitalWalletApi.DTOs.Entities;
+﻿using DigitalWalletApi.DTOs.Entities;
 using DigitalWalletApi.Services.Exceptions;
+using Microsoft.AspNetCore.Identity;
 
 namespace DigitalWalletApi.Services
 {
     public class AuthService
     {
         private readonly UserService _userService;
+        private readonly PasswordHasher<UserDTO> _passwordHasher;
 
-        public AuthService(UserService userService)
+        public AuthService(UserService userService, PasswordHasher<UserDTO> passwordHasher)
         {
             _userService = userService;
+            _passwordHasher = passwordHasher;
         }
 
         public async Task<Object> Login(CredentialsDTO dto)
         {
             try
             {
-                User user = await _userService.FindByEmailAsync(dto.Email);
+                UserDTO user = await _userService.FindByEmailAsync(dto.Email);
 
-                if (!string.Equals(user.Password, dto.Password))
+                var verifiyPassword = _passwordHasher.VerifyHashedPassword(user, user.Password, dto.Password);
+              
+                if (verifiyPassword == PasswordVerificationResult.Failed)
                 {
                     throw new UnauthorizedAccessException("Credenciais inválidas.");
                 }
@@ -30,11 +34,11 @@ namespace DigitalWalletApi.Services
 
                 return new
                 {
-                    user = new UserDTO(user),
+                    user,
                     token
                 };
             }
-            catch (ResourceNotFoundException e)
+            catch (ResourceNotFoundException)
             {
                 throw new UnauthorizedAccessException("Credenciais inválidas.");
             }

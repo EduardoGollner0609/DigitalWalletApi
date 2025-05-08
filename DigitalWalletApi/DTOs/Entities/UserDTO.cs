@@ -21,6 +21,7 @@ namespace DigitalWalletApi.DTOs.Entities
         [StringLength(30, MinimumLength = 6, ErrorMessage = "A senha deve ter entre 6 a 30 caracteres.")]
         public string Password { get; private set; }
         public decimal Balance { get; private set; }
+        public string Role { get; private set; } = string.Empty;
 
         public UserDTO() { }
 
@@ -42,6 +43,7 @@ namespace DigitalWalletApi.DTOs.Entities
             Email = user.Email;
             Password = user.Password;
             Balance = user.Balance;
+            Role = user.Role;
         }
     }
 }

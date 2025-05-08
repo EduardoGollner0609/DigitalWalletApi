@@ -2,6 +2,7 @@
 using DigitalWalletApi.DTOs.Entities;
 using DigitalWalletApi.Infra.Repositories.Abstractions;
 using DigitalWalletApi.Services.Exceptions;
+using Microsoft.AspNetCore.Identity;
 
 namespace DigitalWalletApi.Services
 {
@@ -9,9 +10,12 @@ namespace DigitalWalletApi.Services
     {
         private readonly IUserRepository _repository;
 
-        public UserService(IUserRepository repository)
+        private readonly PasswordHasher<UserDTO> _passwordHasher;
+
+        public UserService(IUserRepository repository, PasswordHasher<UserDTO> passwordHasher)
         {
             _repository = repository;
+            _passwordHasher = passwordHasher;
         }
 
         public async Task<UserDTO> CreateAsync(UserDTO dto)
@@ -36,22 +40,24 @@ namespace DigitalWalletApi.Services
                 : new UserDTO(user);
         }
 
-        public async Task<User> FindByEmailAsync(string email)
+        public async Task<UserDTO> FindByEmailAsync(string email)
         {
             User user = await _repository.FindByEmailAsync(email);
 
             return user == null
                 ? throw new ResourceNotFoundException($"Usuário do email {email} não foi encontrado!")
-                : user;
+                : new UserDTO(user);
         }
 
         private User InstantiateUserByDTO(UserDTO dto)
         {
+            string newPassword = _passwordHasher.HashPassword(dto, dto.Password);
+            string userRole = "user";
             return new User(dto.FirstName,
                 dto.LastName,
                 dto.Email,
-                dto.Password,
-                "user",
+                newPassword,
+                userRole,
                 0.00m);
         }
     }
