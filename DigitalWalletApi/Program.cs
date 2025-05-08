@@ -1,6 +1,7 @@
 using DigitalWalletApi.Infra;
 using DigitalWalletApi.Infra.Repositories.Abstractions;
 using DigitalWalletApi.Infra.Repositories.Implementation;
+using DigitalWalletApi.Services;
 
 namespace DigitalWalletApi
 {
@@ -21,6 +22,8 @@ namespace DigitalWalletApi
 
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<ITransferRepository, TransferRepository>();
+            builder.Services.AddScoped<UserService>();
+            builder.Services.AddScoped<AuthService>();
 
             var app = builder.Build();
 

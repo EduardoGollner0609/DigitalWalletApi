@@ -14,25 +14,26 @@ namespace DigitalWalletApi.Services
             _repository = repository;
         }
 
-        public async Task<User> CreateAsync(UserDTO dto)
+        public async Task<UserDTO> CreateAsync(UserDTO dto)
         {
             User user = InstantiateUserByDTO(dto);
             await _repository.CreateAsync(user);
-            return user;
+            return new UserDTO(user);
         }
 
-        public async Task<ICollection<User>> FindAllAsync()
+        public async Task<ICollection<UserDTO>> FindAllAsync()
         {
-            return await _repository.FindAllAsync();
+            List<User> users = await _repository.FindAllAsync();
+            return users.Select(u => new UserDTO(u)).ToList();
         }
 
-        public async Task<User> FindByIdAsync(Guid id)
+        public async Task<UserDTO> FindByIdAsync(Guid id)
         {
             User user = await _repository.FindByIdAsync(id);
 
             return user == null
                 ? throw new ResourceNotFoundException($"Usuário do ID {id} não foi encontrado!")
-                : user;
+                : new UserDTO(user);
         }
 
         public async Task<User> FindByEmailAsync(string email)

@@ -2,6 +2,6 @@
 {
     public abstract class EntityDTO
     {
-        public Guid Id { get; private set; }
+        public Guid Id { get; protected set; }
     }
 }

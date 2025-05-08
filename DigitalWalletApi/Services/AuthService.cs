@@ -19,7 +19,7 @@ namespace DigitalWalletApi.Services
             {
                 User user = await _userService.FindByEmailAsync(dto.Email);
 
-                if (!string.Equals(user.Password, dto.Password, StringComparison.CurrentCultureIgnoreCase))
+                if (!string.Equals(user.Password, dto.Password))
                 {
                     throw new UnauthorizedAccessException("Credenciais inválidas.");
                 }
@@ -30,7 +30,7 @@ namespace DigitalWalletApi.Services
 
                 return new
                 {
-                    user,
+                    userDTO = new UserDTO(user),
                     token
                 };
             }

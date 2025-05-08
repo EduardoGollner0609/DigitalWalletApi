@@ -1,4 +1,5 @@
 ﻿using DigitalWalletApi.Domain.Abstractions;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DigitalWalletApi.Domain.Entities
 {
@@ -11,7 +12,11 @@ namespace DigitalWalletApi.Domain.Entities
         public decimal Balance { get; private set; }
         public string Role { get; private set; }
 
-        public List<Transfer> Transfers { get; private set; } = new List<Transfer>();
+        [InverseProperty("Sender")]
+        public List<Transfer> TransfersSent { get; private set; } = new List<Transfer>();
+
+        [InverseProperty("Receiver")]
+        public List<Transfer> TransfersReceived { get; private set; } = new List<Transfer>();
 
         public User() { }
 
@@ -39,14 +44,24 @@ namespace DigitalWalletApi.Domain.Entities
             }
         }
 
-        public void AddTransfer(Transfer transfer)
+        public void AddTransferSent(Transfer transfer)
         {
-            Transfers.Add(transfer);
+            TransfersSent.Add(transfer);
         }
 
-        public void RemoveTransfer(Transfer transfer)
+        public void RemoveTransferSent(Transfer transfer)
         {
-            Transfers.Remove(transfer);
+            TransfersSent.Remove(transfer);
+        }
+
+        public void AddTransfersReceived(Transfer transfer)
+        {
+            TransfersReceived.Add(transfer);
+        }
+
+        public void RemoveTransfersReceived(Transfer transfer)
+        {
+            TransfersReceived.Remove(transfer);
         }
     }
 }

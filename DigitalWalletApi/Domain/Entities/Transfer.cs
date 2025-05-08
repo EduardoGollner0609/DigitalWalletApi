@@ -6,17 +6,19 @@ namespace DigitalWalletApi.Domain.Entities
     public class Transfer : Entity
     {
         public Guid SenderId { get; private set; }
-
-        [ForeignKey("SenderId")]
-        public User Sender { get; private set; }
-
         public Guid ReceiverId { get; private set; }
-
-        [ForeignKey("ReceiverId")]
-        public User Receiver { get; private set; }
         public decimal Amount { get; private set; }
 
+        [Column(TypeName = "timestamp")]
         public DateTime Moment { get; private set; }
+
+        [ForeignKey("SenderId")]
+        [InverseProperty("TransfersSent")]
+        public User Sender { get; private set; }
+
+        [ForeignKey("ReceiverId")]
+        [InverseProperty("TransfersReceived")]
+        public User Receiver { get; private set; }
 
         public Transfer() { }
 

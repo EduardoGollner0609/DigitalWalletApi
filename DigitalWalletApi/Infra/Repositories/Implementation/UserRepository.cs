@@ -30,7 +30,7 @@ namespace DigitalWalletApi.Infra.Repositories.Implementation
         {
             return await _context.Users
                .FirstOrDefaultAsync(
-                u => string.Equals(u.Email, email, StringComparison.CurrentCultureIgnoreCase)
+                u => u.Email == email
                 );
         }
 
