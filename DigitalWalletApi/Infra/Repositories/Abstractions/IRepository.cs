@@ -1,6 +1,6 @@
 ﻿using DigitalWalletApi.Domain.Abstractions;
 
-namespace DigitalWalletApi.Infra.Repositories
+namespace DigitalWalletApi.Infra.Repositories.Abstractions
 {
     public interface IRepository<T> where T : Entity
     {
