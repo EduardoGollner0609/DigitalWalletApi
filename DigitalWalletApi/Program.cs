@@ -1,5 +1,9 @@
 using DigitalWalletApi.Data;
+using DigitalWalletApi.Infra;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace DigitalWalletApi
 {
@@ -14,10 +18,9 @@ namespace DigitalWalletApi
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.AddDbContext<AppDbContext>(options =>
-            {
-                options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
-            });
+            builder.AddDatabaseConfiguration();
+
+            builder.AddAuthConfigurarion();
 
             var app = builder.Build();
 
