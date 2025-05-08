@@ -22,17 +22,21 @@ namespace DigitalWalletApi.Models
         [Required]
         public decimal Balance { get; private set; }
 
+        [Required]
+        public string Role { get; private set; }
+
         public List<Transfer> Transfers { get; private set; } = new List<Transfer>();
 
         public User() { }
 
-        public User(Guid id, string firstName, string lastName, string email, string password, decimal amount)
+        public User(Guid id, string firstName, string lastName, string email, string password, decimal amount, string Role)
         {
             Id = id;
             FirstName = firstName;
             LastName = lastName;
             Email = email;
             Password = password;
+            Role = Role;
             Deposit(amount);
         }
 

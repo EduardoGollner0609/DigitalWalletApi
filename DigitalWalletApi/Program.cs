@@ -1,9 +1,4 @@
-using DigitalWalletApi.Data;
 using DigitalWalletApi.Infra;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
 
 namespace DigitalWalletApi
 {
@@ -23,6 +18,9 @@ namespace DigitalWalletApi
             builder.AddAuthConfigurarion();
 
             var app = builder.Build();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             if (app.Environment.IsDevelopment())
             {

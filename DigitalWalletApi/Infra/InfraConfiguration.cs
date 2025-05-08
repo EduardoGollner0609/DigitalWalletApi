@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
 namespace DigitalWalletApi.Infra
@@ -36,6 +35,12 @@ namespace DigitalWalletApi.Infra
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };
+            });
+
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Admin", policy => policy.RequireRole("manager"));
+                options.AddPolicy("User", policy => policy.RequireRole("user"));
             });
         }
     }
