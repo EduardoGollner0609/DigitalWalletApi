@@ -5,10 +5,6 @@ namespace DigitalWalletApi.Domain.Abstractions
     public abstract class Entity
     {
         [Key]
-        public Guid Id { get; private set; }
-        public void GenerateId()
-        {
-            Id = Guid.NewGuid();
-        }
+        public Guid Id { get; protected set; }
     }
 }

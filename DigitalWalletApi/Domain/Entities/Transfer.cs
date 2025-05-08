@@ -22,6 +22,7 @@ namespace DigitalWalletApi.Domain.Entities
 
         public Transfer(Guid senderId, Guid receiverId, decimal amount)
         {
+            base.Id = Guid.NewGuid();
             SenderId = senderId;
             ReceiverId = receiverId;
             Amount = amount;

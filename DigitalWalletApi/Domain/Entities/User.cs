@@ -16,8 +16,9 @@ namespace DigitalWalletApi.Domain.Entities
 
         public User() { }
 
-        public User(string firstName, string lastName, string email, string password, decimal amount, string role)
+        public User(string firstName, string lastName, string email, string password, string role, decimal amount)
         {
+            base.Id = Guid.NewGuid();
             FirstName = firstName;
             LastName = lastName;
             Email = email;

@@ -21,12 +21,12 @@ namespace DigitalWalletApi.Infra.Repositories.Implementation
             return entity;
         }
 
-        public async Task<ICollection<User>> FindAll()
+        public async Task<List<User>> FindAllAsync()
         {
             return await _context.Users.ToListAsync();
         }
 
-        public async Task<User> FindById(Guid id)
+        public async Task<User> FindByIdAsync(Guid id)
         {
             return await _context.Users
                 .FirstOrDefaultAsync(u => u.Id == id);
