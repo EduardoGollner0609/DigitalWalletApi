@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "cDf6nQYKrFwMSUFwKfx1Z3g/Uc9XpTQKzxKQRe4/+o8=",
+  "Source": "DigitalWalletApi",
+  "BasePath": "_content/DigitalWalletApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
