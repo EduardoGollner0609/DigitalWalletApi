@@ -39,7 +39,6 @@ namespace DigitalWalletApi.Infra
 
             builder.Services.AddAuthorization(options =>
             {
-                options.AddPolicy("Admin", policy => policy.RequireRole("manager"));
                 options.AddPolicy("User", policy => policy.RequireRole("user"));
             });
         }

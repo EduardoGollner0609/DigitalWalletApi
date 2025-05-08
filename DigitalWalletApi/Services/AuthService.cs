@@ -30,7 +30,7 @@ namespace DigitalWalletApi.Services
 
                 return new
                 {
-                    userDTO = new UserDTO(user),
+                    user = new UserDTO(user),
                     token
                 };
             }

@@ -21,7 +21,7 @@ namespace DigitalWalletApi.Services
             return new UserDTO(user);
         }
 
-        public async Task<ICollection<UserDTO>> FindAllAsync()
+        public async Task<List<UserDTO>> FindAllAsync()
         {
             List<User> users = await _repository.FindAllAsync();
             return users.Select(u => new UserDTO(u)).ToList();

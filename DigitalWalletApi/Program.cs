@@ -2,6 +2,8 @@ using DigitalWalletApi.Infra;
 using DigitalWalletApi.Infra.Repositories.Abstractions;
 using DigitalWalletApi.Infra.Repositories.Implementation;
 using DigitalWalletApi.Services;
+using System.Security.Claims;
+
 
 namespace DigitalWalletApi
 {
@@ -17,7 +19,6 @@ namespace DigitalWalletApi
             builder.Services.AddSwaggerGen();
 
             builder.AddDatabaseConfiguration();
-
             builder.AddAuthConfigurarion();
 
             builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -27,9 +28,6 @@ namespace DigitalWalletApi
 
             var app = builder.Build();
 
-            app.UseAuthentication();
-            app.UseAuthorization();
-
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -38,6 +36,7 @@ namespace DigitalWalletApi
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllers();

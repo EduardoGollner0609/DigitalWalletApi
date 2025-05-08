@@ -1,6 +1,9 @@
 ﻿using DigitalWalletApi.DTOs.Entities;
 using DigitalWalletApi.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
+
 
 namespace DigitalWalletApi.Controllers
 {
@@ -22,5 +25,6 @@ namespace DigitalWalletApi.Controllers
             string uri = $"/users/{userDTO.Id}";
             return Created(uri, userDTO);
         }
+
     }
 }

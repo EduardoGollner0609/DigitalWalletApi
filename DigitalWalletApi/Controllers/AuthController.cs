@@ -1,6 +1,7 @@
 ﻿using DigitalWalletApi.DTOs.Entities;
 using DigitalWalletApi.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace DigitalWalletApi.Controllers
 {
@@ -25,7 +26,7 @@ namespace DigitalWalletApi.Controllers
             }
             catch (UnauthorizedAccessException e)
             {
-                return Unauthorized(new { message = e.Message });
+                return NotFound(new { message = e.Message });
             }
         }
     }
