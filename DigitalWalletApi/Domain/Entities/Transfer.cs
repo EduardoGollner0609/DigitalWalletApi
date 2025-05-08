@@ -1,13 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using DigitalWalletApi.Domain.Abstractions;
 
-namespace DigitalWalletApi.Models
+namespace DigitalWalletApi.Domain.Entities
 {
-    public class Transfer
+    public class Transfer : Entity
     {
-        [Key]
-        public Guid Id { get; set; }
-
         public Guid SenderId { get; set; }
 
         [ForeignKey("SenderId")]
@@ -22,9 +19,8 @@ namespace DigitalWalletApi.Models
 
         public Transfer() { }
 
-        public Transfer(Guid senderId, Guid receiverId)
+        public Transfer(Guid id, Guid senderId, Guid receiverId) : base()
         {
-            Id = Guid.NewGuid();
             SenderId = senderId;
             ReceiverId = receiverId;
             Moment = DateTime.UtcNow;

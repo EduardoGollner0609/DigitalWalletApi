@@ -1,12 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using DigitalWalletApi.Domain.Abstractions;
 
-namespace DigitalWalletApi.Models
+namespace DigitalWalletApi.Domain.Entities
 {
-    public class User
+    public class User : Entity
     {
-        [Key]
-        public Guid Id { get; private set; }
-
         [Required(AllowEmptyStrings = false)]
         public string FirstName { get; private set; }
 
@@ -29,14 +27,13 @@ namespace DigitalWalletApi.Models
 
         public User() { }
 
-        public User(Guid id, string firstName, string lastName, string email, string password, decimal amount, string Role)
+        public User(Guid id, string firstName, string lastName, string email, string password, decimal amount, string role) : base()
         {
-            Id = id;
             FirstName = firstName;
             LastName = lastName;
             Email = email;
             Password = password;
-            Role = Role;
+            Role = role;
             Deposit(amount);
         }
 
