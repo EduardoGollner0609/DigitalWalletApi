@@ -1,4 +1,5 @@
 ﻿using DigitalWalletApi.Domain.Abstractions;
+using DigitalWalletApi.Domain.Entities.Enums;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DigitalWalletApi.Domain.Entities
@@ -13,7 +14,7 @@ namespace DigitalWalletApi.Domain.Entities
         public string Email { get; private set; }
         public string Password { get; private set; }
         public decimal Balance { get; private set; }
-        public string Role { get; private set; }
+        public Role Role { get; private set; }
 
         [InverseProperty("Sender")]
         public List<Transfer> TransfersSent { get; private set; } = new List<Transfer>();
@@ -23,7 +24,7 @@ namespace DigitalWalletApi.Domain.Entities
 
         public User() { }
 
-        public User(string firstName, string lastName, string email, string password, string role, decimal amount)
+        public User(string firstName, string lastName, string email, string password, Role role, decimal amount)
         {
             base.Id = Guid.NewGuid();
             FirstName = firstName;

@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DigitalWalletApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250509075142_CreateTables")]
+    [Migration("20250509085615_CreateTables")]
     partial class CreateTables
     {
         /// <inheritdoc />
@@ -77,9 +77,8 @@ namespace DigitalWalletApi.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("Role")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 

@@ -1,4 +1,5 @@
 ﻿using DigitalWalletApi.Domain.Entities;
+using DigitalWalletApi.Domain.Entities.Enums;
 using DigitalWalletApi.DTOs.Entities;
 using DigitalWalletApi.Infra.Repositories.Abstractions;
 using DigitalWalletApi.Services.Exceptions;
@@ -77,12 +78,11 @@ namespace DigitalWalletApi.Services
 
         private User InstantiateUserByDTO(UserDTO dto)
         {
-            string userRole = "user";
             return new User(dto.FirstName,
                 dto.LastName,
                 dto.Email,
                 dto.Password,
-                userRole,
+                Role.User,
                 0.00m);
         }
     }

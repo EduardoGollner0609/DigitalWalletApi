@@ -1,4 +1,5 @@
 ﻿using DigitalWalletApi.Domain.Entities;
+using DigitalWalletApi.Domain.Entities.Enums;
 using DigitalWalletApi.DTOs.Abstractions;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
@@ -23,7 +24,7 @@ namespace DigitalWalletApi.DTOs.Entities
         [StringLength(30, MinimumLength = 6, ErrorMessage = "A senha deve ter entre 6 a 30 caracteres.")]
         public string Password { get; private set; }
         public decimal Balance { get; private set; }
-        public string Role { get; private set; } = string.Empty;
+        public Role Role { get; private set; }
 
         public UserDTO() { }
 

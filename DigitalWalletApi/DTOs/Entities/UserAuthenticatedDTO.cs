@@ -1,4 +1,5 @@
 ﻿using DigitalWalletApi.Domain.Entities;
+using DigitalWalletApi.Domain.Entities.Enums;
 
 namespace DigitalWalletApi.DTOs.Entities
 {
@@ -9,10 +10,10 @@ namespace DigitalWalletApi.DTOs.Entities
 
         public UserAuthenticatedDTO() { }
 
-        public UserAuthenticatedDTO(User user, string role, string token) :
+        public UserAuthenticatedDTO(User user, Role role, string token) :
         base(user)
         {
-            Role = role;
+            Role = role.ToString();
             Token = token;
         }
     }
