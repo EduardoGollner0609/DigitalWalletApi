@@ -22,13 +22,13 @@ namespace DigitalWalletApi.Domain.Entities
 
         public Transfer() { }
 
-        public Transfer(Guid senderId, Guid receiverId, decimal amount)
+        public Transfer(Guid senderId, Guid receiverId, decimal amount, DateTime moment)
         {
             base.Id = Guid.NewGuid();
             SenderId = senderId;
             ReceiverId = receiverId;
             Amount = amount;
-            Moment = DateTime.UtcNow;
+            Moment = moment;
         }
     }
 }

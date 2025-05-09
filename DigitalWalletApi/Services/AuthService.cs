@@ -1,7 +1,6 @@
 ﻿using DigitalWalletApi.DTOs.Entities;
 using DigitalWalletApi.Services.Exceptions;
 using Microsoft.AspNetCore.Identity;
-using System.Security.Claims;
 
 namespace DigitalWalletApi.Services
 {

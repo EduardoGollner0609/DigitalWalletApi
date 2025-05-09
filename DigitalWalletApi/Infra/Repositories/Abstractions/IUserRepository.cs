@@ -5,7 +5,5 @@ namespace DigitalWalletApi.Infra.Repositories.Abstractions
     public interface IUserRepository : IRepository<User>
     {
         Task<User> FindByEmailAsync(string email);
-
-        Task<decimal> GetBalance();
     }
 }

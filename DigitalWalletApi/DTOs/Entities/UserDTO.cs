@@ -8,9 +8,11 @@ namespace DigitalWalletApi.DTOs.Entities
     public class UserDTO : EntityDTO
     {
         [Required(AllowEmptyStrings = false, ErrorMessage = "O Nome deve ser informado.")]
+        [StringLength(40, MinimumLength = 4, ErrorMessage = "O nome deve ter entre 4 a 40 caracteres.")]
         public string FirstName { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "O Sobrenome deve ser informado.")]
+        [StringLength(40, MinimumLength = 6, ErrorMessage = "A senha deve ter entre 6 a 40 caracteres.")]
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "Email deve ser informado.")]

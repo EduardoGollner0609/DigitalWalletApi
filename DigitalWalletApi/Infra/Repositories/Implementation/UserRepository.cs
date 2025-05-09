@@ -20,29 +20,12 @@ namespace DigitalWalletApi.Infra.Repositories.Implementation
             await _context.SaveChangesAsync();
             return entity;
         }
-
-        public async Task<List<User>> FindAllAsync()
-        {
-            return await _context.Users.ToListAsync();
-        }
-
         public async Task<User> FindByEmailAsync(string email)
         {
             return await _context.Users
                .FirstOrDefaultAsync(
                 u => u.Email == email
                 );
-        }
-
-        public async Task<User> FindByIdAsync(Guid id)
-        {
-            return await _context.Users
-                .FirstOrDefaultAsync(u => u.Id == id);
-        }
-
-        public Task<decimal> GetBalance()
-        {
-            throw new NotImplementedException();
         }
     }
 }

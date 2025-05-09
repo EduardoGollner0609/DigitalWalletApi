@@ -5,7 +5,5 @@ namespace DigitalWalletApi.Infra.Repositories.Abstractions
     public interface IRepository<T> where T : Entity
     {
         Task<T> CreateAsync(T entity);
-        Task<List<T>> FindAllAsync();
-        Task<T> FindByIdAsync(Guid id);
     }
 }

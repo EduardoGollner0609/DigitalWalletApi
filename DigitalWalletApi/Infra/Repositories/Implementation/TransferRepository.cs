@@ -21,16 +21,5 @@ namespace DigitalWalletApi.Infra.Repositories.Implementation
             await _context.SaveChangesAsync();
             return await _context.Transfers.Include(t => t.Sender).Include(t => t.Receiver).FirstOrDefaultAsync(t => t.Id == entity.Id);
         }
-
-        public async Task<List<Transfer>> FindAllAsync()
-        {
-            return await _context.Transfers.ToListAsync();
-        }
-
-        public async Task<Transfer> FindByIdAsync(Guid id)
-        {
-            return await _context.Transfers
-                .FirstOrDefaultAsync(u => u.Id == id);
-        }
     }
 }
