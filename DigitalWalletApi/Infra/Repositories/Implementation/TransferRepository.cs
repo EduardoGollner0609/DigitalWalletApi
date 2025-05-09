@@ -24,5 +24,30 @@ namespace DigitalWalletApi.Infra.Repositories.Implementation
                 .Include(t => t.Receiver)
                 .FirstOrDefaultAsync(t => t.Id == entity.Id);
         }
+
+        public async Task<List<Transfer>> GetSentTransfersByDateAsync(Guid senderId, DateTime? minDate, DateTime? maxDate)
+        {
+            var query = _context.Transfers
+                .Where(t => t.SenderId == senderId);
+
+            if (minDate != null)
+            {
+                minDate = minDate.Value.ToUniversalTime();
+                Console.WriteLine("Data min em utc: " + minDate);
+                query = query.Where(t => t.Moment >= minDate.Value);
+            }
+
+            if (maxDate != null)
+            {
+                maxDate = maxDate.Value.ToUniversalTime();
+                Console.WriteLine("Data max em utc: " + maxDate);
+                query = query.Where(t => t.Moment <= maxDate.Value);
+            }
+
+            return await query
+            .Include(t => t.Sender)
+            .Include(t => t.Receiver)
+            .ToListAsync();
+        }
     }
 }

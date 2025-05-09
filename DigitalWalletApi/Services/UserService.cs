@@ -14,12 +14,17 @@ namespace DigitalWalletApi.Services
         private readonly IUserRepository _repository;
         private readonly PasswordHasher<User> _passwordHasher;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly TransferService _transferService;
 
-        public UserService(IUserRepository repository, PasswordHasher<User> passwordHasher, IHttpContextAccessor httpContextAccessor)
+        public UserService(IUserRepository repository,
+            PasswordHasher<User> passwordHasher,
+            IHttpContextAccessor httpContextAccessor,
+            TransferService transferService)
         {
             _repository = repository;
             _passwordHasher = passwordHasher;
             _httpContextAccessor = httpContextAccessor;
+            _transferService = transferService;
         }
 
         public async Task<UserMinDTO> CreateAsync(UserDTO dto)
@@ -75,6 +80,12 @@ namespace DigitalWalletApi.Services
             {
                 throw new UnauthorizedAccessException("Token inválido ou ausente.");
             }
+        }
+
+        public async Task<List<TransferDTO>> GetSentTransfersByDateAsync(Guid senderId, DateTime? minDate, DateTime? maxDate)
+        {
+            return await _transferService
+                .GetSentTransfersByDateAsync(senderId, minDate, maxDate);
         }
 
         private User InstantiateUserByDTO(UserDTO dto)

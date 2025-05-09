@@ -82,5 +82,20 @@ namespace DigitalWalletApi.Controllers
                 return Unauthorized(new ErrorResponseDTO(401, e.Message));
             }
         }
+
+        [Authorize]
+        [HttpGet("transfers/sent")]
+        public async Task<ActionResult<List<TransferDTO>>> GetSentTransfersByDateAsync([FromQuery] DateTime? minDate, [FromQuery] DateTime? maxDate)
+        {
+            try
+            {
+                UserMinDTO dto = await _userService.GetMe();
+                return await _userService.GetSentTransfersByDateAsync(dto.Id, minDate, maxDate);
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                return Unauthorized(new ErrorResponseDTO(401, e.Message));
+            }
+        }
     }
 }

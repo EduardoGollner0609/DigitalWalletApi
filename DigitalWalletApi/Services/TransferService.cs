@@ -29,6 +29,13 @@ namespace DigitalWalletApi.Services
             }
         }
 
+        public async Task<List<TransferDTO>> GetSentTransfersByDateAsync(Guid senderId, DateTime? minDate, DateTime? maxDate)
+        {
+            List<Transfer> transfers = await _repository
+                .GetSentTransfersByDateAsync(senderId, minDate, maxDate);
+            return transfers.Select(t => new TransferDTO(t)).ToList();
+        }
+
         private Transfer InstantiateTransferByDTO(TransferDTO dto)
         {
             return new Transfer(
