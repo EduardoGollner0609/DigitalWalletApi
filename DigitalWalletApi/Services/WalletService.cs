@@ -16,10 +16,6 @@ namespace DigitalWalletApi.Services
 
         public async Task<UserMinDTO> Deposit(UserMinDTO dto, DepositDTO deposit)
         {
-            if(deposit.Amount <= 0)
-            {
-                throw new ArgumentException("A quantia é obrigatória e deve ser maior que zero.");
-            }
             User user = await _userRepository.FindByEmailAsync(dto.Email);
 
             if (user == null)

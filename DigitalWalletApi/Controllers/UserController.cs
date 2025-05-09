@@ -81,10 +81,6 @@ namespace DigitalWalletApi.Controllers
             {
                 return Unauthorized(new ErrorResponseDTO(401, e.Message));
             }
-            catch (ArgumentException e)
-            {
-                return BadRequest(new ErrorResponseDTO(400, e.Message));
-            }
         }
     }
 }
