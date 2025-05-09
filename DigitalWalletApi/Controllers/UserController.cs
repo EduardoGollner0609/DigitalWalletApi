@@ -77,11 +77,7 @@ namespace DigitalWalletApi.Controllers
                 user = await _walletService.Deposit(user, deposit);
                 return Ok(user);
             }
-            catch (UnauthorizedAccessException e)
-            {
-                return Unauthorized(new ErrorResponseDTO(401, e.Message));
-            }
-            catch (ResourceNotFoundException e)
+            catch (Exception e) when (e is UnauthorizedAccessException || e is ResourceNotFoundException)
             {
                 return Unauthorized(new ErrorResponseDTO(401, e.Message));
             }
