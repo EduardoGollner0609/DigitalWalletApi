@@ -20,6 +20,7 @@ namespace DigitalWalletApi.DTOs.Entities
 
         public UserMinDTO(User user)
         {
+            base.Id = user.Id;
             Name = $"{user.FirstName} {user.LastName}";
             Email = user.Email;
             Balance = user.Balance;

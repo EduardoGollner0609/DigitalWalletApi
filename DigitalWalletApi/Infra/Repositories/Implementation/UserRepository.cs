@@ -20,6 +20,12 @@ namespace DigitalWalletApi.Infra.Repositories.Implementation
             await _context.SaveChangesAsync();
             return entity;
         }
+
+        public async Task<bool> ExistsByEmailAsync(string email)
+        {
+            return await _context.Users.AnyAsync(u => u.Email == email);
+        }
+
         public async Task<User> FindByEmailAsync(string email)
         {
             return await _context.Users

@@ -10,11 +10,7 @@ namespace DigitalWalletApi.Domain.Entities
 
         [Column(TypeName = "varchar(40)")]
         public string LastName { get; private set; }
-
-        [Column(TypeName = "varchar(40)")]
         public string Email { get; private set; }
-
-        [Column(TypeName = "varchar(30)")]
         public string Password { get; private set; }
         public decimal Balance { get; private set; }
         public string Role { get; private set; }

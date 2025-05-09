@@ -1,9 +1,9 @@
 ﻿using DigitalWalletApi.DTOs.Entities;
+using DigitalWalletApi.DTOs.ExceptionsRepresentation;
 using DigitalWalletApi.Services;
+using DigitalWalletApi.Services.Exceptions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
-
 
 namespace DigitalWalletApi.Controllers
 {
@@ -19,11 +19,18 @@ namespace DigitalWalletApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<UserDTO>> CreateAsync(UserDTO dto)
+        public async Task<ActionResult<UserMinDTO>> CreateAsync(UserDTO dto)
         {
-            UserDTO userDTO = await _userService.CreateAsync(dto);
-            string uri = $"/user/{userDTO.Id}";
-            return Created(uri, userDTO);
+            try
+            {
+                UserMinDTO user = await _userService.CreateAsync(dto);
+                string uri = $"/user/{user.Id}";
+                return Created(uri, user);
+            }
+            catch (CreateEntityException e)
+            {
+                return BadRequest(new ErrorResponseDTO(400, e.Message));
+            }
         }
 
         [Authorize]

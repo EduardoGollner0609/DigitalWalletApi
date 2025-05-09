@@ -148,3 +148,4 @@ C:\Users\dudug\source\repos\DigitalWalletApi\DigitalWalletApi\obj\Debug\net8.0\r
 C:\Users\dudug\source\repos\DigitalWalletApi\DigitalWalletApi\obj\Debug\net8.0\DigitalWalletApi.pdb
 C:\Users\dudug\source\repos\DigitalWalletApi\DigitalWalletApi\obj\Debug\net8.0\DigitalWalletApi.genruntimeconfig.cache
 C:\Users\dudug\source\repos\DigitalWalletApi\DigitalWalletApi\obj\Debug\net8.0\ref\DigitalWalletApi.dll
+C:\Users\dudug\source\repos\DigitalWalletApi\DigitalWalletApi\bin\Debug\net8.0\stylecop.json

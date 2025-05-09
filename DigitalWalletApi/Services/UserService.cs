@@ -3,6 +3,7 @@ using DigitalWalletApi.DTOs.Entities;
 using DigitalWalletApi.Infra.Repositories.Abstractions;
 using DigitalWalletApi.Services.Exceptions;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace DigitalWalletApi.Services
@@ -10,7 +11,6 @@ namespace DigitalWalletApi.Services
     public class UserService
     {
         private readonly IUserRepository _repository;
-
         private readonly PasswordHasher<UserDTO> _passwordHasher;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
@@ -21,11 +21,23 @@ namespace DigitalWalletApi.Services
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<UserDTO> CreateAsync(UserDTO dto)
+        public async Task<UserMinDTO> CreateAsync(UserDTO dto)
         {
-            User user = InstantiateUserByDTO(dto);
-            await _repository.CreateAsync(user);
-            return new UserDTO(user);
+            try
+            {
+                if (await _repository.ExistsByEmailAsync(dto.Email))
+                {
+                    throw new CreateEntityException("Erro ao tentar criar usuário, email já cadastrado.");
+                }
+
+                User user = InstantiateUserByDTO(dto);
+                await _repository.CreateAsync(user);
+                return new UserMinDTO(user);
+            }
+            catch(DbUpdateException e)
+            {
+                throw new CreateEntityException("Erro ao tentar criar usuário.");
+            }
         }
 
         public async Task<UserDTO> FindByEmailAsync(string email)
