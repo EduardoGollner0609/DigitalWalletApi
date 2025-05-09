@@ -1,6 +1,7 @@
 ﻿using DigitalWalletApi.Domain.Entities;
 using DigitalWalletApi.DTOs.Abstractions;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 namespace DigitalWalletApi.DTOs.Entities
 {
     public class TransferDTO : EntityDTO
@@ -21,6 +22,7 @@ namespace DigitalWalletApi.DTOs.Entities
 
         public TransferDTO() { }
 
+        [JsonConstructor]
         public TransferDTO(Guid id, Guid senderId, Guid receiverId, decimal amount)
         {
             SenderId = senderId;

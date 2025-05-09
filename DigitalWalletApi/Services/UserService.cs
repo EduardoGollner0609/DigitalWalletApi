@@ -3,6 +3,7 @@ using DigitalWalletApi.DTOs.Entities;
 using DigitalWalletApi.Infra.Repositories.Abstractions;
 using DigitalWalletApi.Services.Exceptions;
 using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace DigitalWalletApi.Services
 {
@@ -11,11 +12,13 @@ namespace DigitalWalletApi.Services
         private readonly IUserRepository _repository;
 
         private readonly PasswordHasher<UserDTO> _passwordHasher;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public UserService(IUserRepository repository, PasswordHasher<UserDTO> passwordHasher)
+        public UserService(IUserRepository repository, PasswordHasher<UserDTO> passwordHasher, IHttpContextAccessor httpContextAccessor)
         {
             _repository = repository;
             _passwordHasher = passwordHasher;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<UserDTO> CreateAsync(UserDTO dto)
@@ -47,6 +50,31 @@ namespace DigitalWalletApi.Services
             return user == null
                 ? throw new ResourceNotFoundException($"Usuário do email {email} não foi encontrado!")
                 : new UserDTO(user);
+        }
+
+        public async Task<UserDTO> GetMe()
+        {
+            try
+            {
+                ClaimsIdentity identity = _httpContextAccessor.HttpContext.User.Identity as ClaimsIdentity;
+
+                if (identity != null && identity.Claims != null)
+                {
+                    var email = identity.FindFirst(ClaimTypes.Name)?.Value;
+                    var role = identity.FindFirst(ClaimTypes.Role)?.Value;
+
+                    UserDTO user = await FindByEmailAsync(email);
+
+                    return user == null ?
+                       throw new ResourceNotFoundException()
+                        : user;
+                }
+                throw new UnauthorizedAccessException("Token inválido ou ausente.");
+            }
+            catch (ResourceNotFoundException)
+            {
+                throw new UnauthorizedAccessException("Token inválido ou ausente.");
+            }
         }
 
         private User InstantiateUserByDTO(UserDTO dto)

@@ -39,5 +39,10 @@ namespace DigitalWalletApi.Infra.Repositories.Implementation
             return await _context.Users
                 .FirstOrDefaultAsync(u => u.Id == id);
         }
+
+        public Task<decimal> GetBalance()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

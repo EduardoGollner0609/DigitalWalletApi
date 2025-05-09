@@ -1,6 +1,7 @@
 ﻿using DigitalWalletApi.DTOs.Entities;
 using DigitalWalletApi.Services.Exceptions;
 using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace DigitalWalletApi.Services
 {
@@ -22,7 +23,7 @@ namespace DigitalWalletApi.Services
                 UserDTO user = await _userService.FindByEmailAsync(dto.Email);
 
                 var verifiyPassword = _passwordHasher.VerifyHashedPassword(user, user.Password, dto.Password);
-              
+
                 if (verifiyPassword == PasswordVerificationResult.Failed)
                 {
                     throw new UnauthorizedAccessException("Credenciais inválidas.");

@@ -9,7 +9,7 @@ namespace DigitalWalletApi.Domain.Entities
         public Guid ReceiverId { get; private set; }
         public decimal Amount { get; private set; }
 
-        [Column(TypeName = "timestamp")]
+        [Column(TypeName = "timestamp with time zone")]
         public DateTime Moment { get; private set; }
 
         [ForeignKey("SenderId")]

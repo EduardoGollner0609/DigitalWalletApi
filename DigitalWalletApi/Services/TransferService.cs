@@ -15,25 +15,26 @@ namespace DigitalWalletApi.Services
             _repository = repository;
         }
 
-        public async Task<Transfer> CreateAsync(TransferDTO dto)
+        public async Task<TransferDTO> CreateAsync(TransferDTO dto)
         {
             Transfer transfer = InstantiateTransferByDTO(dto);
             await _repository.CreateAsync(transfer);
-            return transfer;
+            return new TransferDTO(transfer);
         }
 
-        public async Task<List<Transfer>> FindAllAsync()
+        public async Task<List<TransferDTO>> FindAllAsync()
         {
-            return await _repository.FindAllAsync();
+            List<Transfer> transfers = await _repository.FindAllAsync();
+            return transfers.Select(t => new TransferDTO(t)).ToList();
         }
 
-        public async Task<Transfer> FindByIdAsync(Guid id)
+        public async Task<TransferDTO> FindByIdAsync(Guid id)
         {
             Transfer transfer = await _repository.FindByIdAsync(id);
 
             return transfer == null
                 ? throw new ResourceNotFoundException($"Transfêrenia do ID {id} não foi encontrada!")
-                : transfer;
+                : new TransferDTO(transfer);
         }
 
         private Transfer InstantiateTransferByDTO(TransferDTO dto)

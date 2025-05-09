@@ -1,10 +1,8 @@
-﻿using DigitalWalletApi.Domain.Entities;
-using DigitalWalletApi.DTOs.Entities;
+﻿using DigitalWalletApi.DTOs.Entities;
 using DigitalWalletApi.Services;
-using DigitalWalletApi.Services.Exceptions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
+
 
 
 namespace DigitalWalletApi.Controllers
@@ -24,39 +22,33 @@ namespace DigitalWalletApi.Controllers
         public async Task<ActionResult<UserDTO>> CreateAsync(UserDTO dto)
         {
             UserDTO userDTO = await _userService.CreateAsync(dto);
-            string uri = $"/users/{userDTO.Id}";
+            string uri = $"/user/{userDTO.Id}";
             return Created(uri, userDTO);
         }
 
-        [HttpGet("me")]
         [Authorize]
-        public async Task<ActionResult<UserDTO>> GetUserClaims()
+        [HttpGet("me")]
+        public async Task<ActionResult<UserDTO>> GetMe()
         {
             try
             {
-                var identity = HttpContext.User.Identity as ClaimsIdentity;
-
-                if (identity != null && identity.Claims != null)
-                {
-                    var email = identity.FindFirst(ClaimTypes.Name)?.Value;
-                    var role = identity.FindFirst(ClaimTypes.Role)?.Value;
-
-                    UserDTO user = await _userService.FindByEmailAsync(email);
-
-                    return user == null ?
-                        NotFound()
-                        : Ok(new
-                        {
-                            user,
-                            role
-                        });
-                }
-                return Unauthorized("Token inválido ou ausente.");
+                UserDTO user = await _userService.GetMe();
+                return Ok(user);
             }
-            catch (ResourceNotFoundException)
+            catch (UnauthorizedAccessException e)
             {
-                return Unauthorized("Token inválido ou ausente.");
+                return NotFound(new { message = e.Message });
             }
+        }
+
+
+        [Authorize]
+        [HttpGet("balance")]
+        public async Task<ActionResult<double>> GetMyBalance()
+        {
+            UserDTO userDTO = await _userService.GetMe();
+            decimal balance = userDTO.Balance;
+            return Ok(balance);
         }
     }
 }
