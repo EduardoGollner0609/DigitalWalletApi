@@ -51,22 +51,23 @@ namespace DigitalWalletApi.Services
                 : user;
         }
 
-        public async Task<UserMinDTO> GetMe()
+        public async Task<UserAuthenticatedDTO> GetMe()
         {
             try
             {
-                ClaimsIdentity identity = _httpContextAccessor.HttpContext.User.Identity as ClaimsIdentity;
+                ClaimsIdentity identity = _httpContextAccessor
+                    .HttpContext.User.Identity as ClaimsIdentity;
 
                 if (identity != null && identity.Claims != null)
                 {
-                    var email = identity.FindFirst(ClaimTypes.Name)?.Value;
-                    var role = identity.FindFirst(ClaimTypes.Role)?.Value;
+                    var email = identity.FindFirst(ClaimTypes.Name)?.Value ?? string.Empty;
+                    var role = identity.FindFirst(ClaimTypes.Role)?.Value ?? string.Empty;
 
                     User user = await FindByEmailAsync(email);
 
-                    return user == null ?
-                       throw new ResourceNotFoundException()
-                        : new UserMinDTO(user);
+                    return user == null
+                        ? throw new UnauthorizedAccessException("Credenciais inválidas.")
+                        : new UserAuthenticatedDTO(user, Enum.Parse<Role>(role));
                 }
                 throw new UnauthorizedAccessException("Token inválido ou ausente.");
             }

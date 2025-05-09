@@ -16,7 +16,7 @@ namespace DigitalWalletApi.Services
             _passwordHasher = passwordHasher;
         }
 
-        public async Task<UserAuthenticatedDTO> Login(CredentialsDTO dto)
+        public async Task<UserAuthenticatedLoginDTO> Login(CredentialsDTO dto)
         {
             try
             {
@@ -31,7 +31,7 @@ namespace DigitalWalletApi.Services
 
                 var token = TokenService.GeneratedToken(user);
 
-                return new UserAuthenticatedDTO(user, user.Role, token);
+                return new UserAuthenticatedLoginDTO(user, user.Role, token);
             }
             catch (ResourceNotFoundException)
             {

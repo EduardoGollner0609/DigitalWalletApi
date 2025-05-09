@@ -17,12 +17,12 @@ namespace DigitalWalletApi.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<UserAuthenticatedDTO>> Login(CredentialsDTO dto)
+        public async Task<ActionResult<UserAuthenticatedLoginDTO>> Login(CredentialsDTO dto)
         {
             try
             {
-                UserAuthenticatedDTO userAuthenticated = await _authService.Login(dto);
-                return Ok(userAuthenticated);
+                UserAuthenticatedLoginDTO user = await _authService.Login(dto);
+                return Ok(user);
             }
             catch (UnauthorizedAccessException e)
             {

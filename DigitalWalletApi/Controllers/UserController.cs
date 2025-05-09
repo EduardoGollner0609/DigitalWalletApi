@@ -35,16 +35,16 @@ namespace DigitalWalletApi.Controllers
 
         [Authorize]
         [HttpGet("me")]
-        public async Task<ActionResult<UserMinDTO>> GetMe()
+        public async Task<ActionResult<UserAuthenticatedDTO>> GetMe()
         {
             try
             {
-                UserMinDTO user = await _userService.GetMe();
+                UserAuthenticatedDTO user = await _userService.GetMe();
                 return Ok(user);
             }
             catch (UnauthorizedAccessException e)
             {
-                return NotFound(new { message = e.Message });
+                return Unauthorized(new ErrorResponseDTO(401, e.Message));
             }
         }
 
