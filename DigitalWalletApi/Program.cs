@@ -1,4 +1,4 @@
-using DigitalWalletApi.DTOs.Entities;
+using DigitalWalletApi.Domain.Entities;
 using DigitalWalletApi.Infra;
 using DigitalWalletApi.Infra.Repositories.Abstractions;
 using DigitalWalletApi.Infra.Repositories.Implementation;
@@ -29,7 +29,7 @@ namespace DigitalWalletApi
             builder.Services.AddScoped<UserService>();
             builder.Services.AddScoped<AuthService>();
             builder.Services.AddScoped<TransferService>();
-            builder.Services.AddScoped<PasswordHasher<UserDTO>>();
+            builder.Services.AddScoped<PasswordHasher<User>>();
    
             var app = builder.Build();
 

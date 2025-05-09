@@ -11,10 +11,10 @@ namespace DigitalWalletApi.Services
     public class UserService
     {
         private readonly IUserRepository _repository;
-        private readonly PasswordHasher<UserDTO> _passwordHasher;
+        private readonly PasswordHasher<User> _passwordHasher;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public UserService(IUserRepository repository, PasswordHasher<UserDTO> passwordHasher, IHttpContextAccessor httpContextAccessor)
+        public UserService(IUserRepository repository, PasswordHasher<User> passwordHasher, IHttpContextAccessor httpContextAccessor)
         {
             _repository = repository;
             _passwordHasher = passwordHasher;
@@ -31,25 +31,26 @@ namespace DigitalWalletApi.Services
                 }
 
                 User user = InstantiateUserByDTO(dto);
+                user.SetPassword(_passwordHasher.HashPassword(user, user.Password));
                 await _repository.CreateAsync(user);
                 return new UserMinDTO(user);
             }
-            catch(DbUpdateException e)
+            catch (DbUpdateException e)
             {
                 throw new CreateEntityException("Erro ao tentar criar usuário.");
             }
         }
 
-        public async Task<UserDTO> FindByEmailAsync(string email)
+        public async Task<User> FindByEmailAsync(string email)
         {
             User user = await _repository.FindByEmailAsync(email);
 
             return user == null
                 ? throw new ResourceNotFoundException($"Usuário do email {email} não foi encontrado!")
-                : new UserDTO(user);
+                : user;
         }
 
-        public async Task<UserDTO> GetMe()
+        public async Task<UserMinDTO> GetMe()
         {
             try
             {
@@ -60,11 +61,11 @@ namespace DigitalWalletApi.Services
                     var email = identity.FindFirst(ClaimTypes.Name)?.Value;
                     var role = identity.FindFirst(ClaimTypes.Role)?.Value;
 
-                    UserDTO user = await FindByEmailAsync(email);
+                    User user = await FindByEmailAsync(email);
 
                     return user == null ?
                        throw new ResourceNotFoundException()
-                        : user;
+                        : new UserMinDTO(user);
                 }
                 throw new UnauthorizedAccessException("Token inválido ou ausente.");
             }
@@ -76,12 +77,11 @@ namespace DigitalWalletApi.Services
 
         private User InstantiateUserByDTO(UserDTO dto)
         {
-            string newPassword = _passwordHasher.HashPassword(dto, dto.Password);
             string userRole = "user";
             return new User(dto.FirstName,
                 dto.LastName,
                 dto.Email,
-                newPassword,
+                dto.Password,
                 userRole,
                 0.00m);
         }

@@ -66,5 +66,10 @@ namespace DigitalWalletApi.Domain.Entities
         {
             TransfersReceived.Remove(transfer);
         }
+
+        public void SetPassword(string password)
+        {
+            Password = password;
+        }
     }
 }

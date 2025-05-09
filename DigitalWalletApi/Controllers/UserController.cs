@@ -35,11 +35,11 @@ namespace DigitalWalletApi.Controllers
 
         [Authorize]
         [HttpGet("me")]
-        public async Task<ActionResult<UserDTO>> GetMe()
+        public async Task<ActionResult<UserMinDTO>> GetMe()
         {
             try
             {
-                UserDTO user = await _userService.GetMe();
+                UserMinDTO user = await _userService.GetMe();
                 return Ok(user);
             }
             catch (UnauthorizedAccessException e)
@@ -53,8 +53,8 @@ namespace DigitalWalletApi.Controllers
         [HttpGet("balance")]
         public async Task<ActionResult<double>> GetMyBalance()
         {
-            UserDTO userDTO = await _userService.GetMe();
-            decimal balance = userDTO.Balance;
+            UserMinDTO user = await _userService.GetMe();
+            decimal balance = user.Balance;
             return Ok(balance);
         }
     }

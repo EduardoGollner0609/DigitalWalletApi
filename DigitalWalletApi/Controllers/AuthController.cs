@@ -1,8 +1,7 @@
 ﻿using DigitalWalletApi.DTOs.Entities;
+using DigitalWalletApi.DTOs.ExceptionsRepresentation;
 using DigitalWalletApi.Services;
-using DigitalWalletApi.Services.Exceptions;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace DigitalWalletApi.Controllers
 {
@@ -18,20 +17,16 @@ namespace DigitalWalletApi.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<Object>> Login(CredentialsDTO dto)
+        public async Task<ActionResult<UserAuthenticatedDTO>> Login(CredentialsDTO dto)
         {
             try
             {
-                var token = await _authService.Login(dto);
-                return Ok(token);
+                UserAuthenticatedDTO userAuthenticated = await _authService.Login(dto);
+                return Ok(userAuthenticated);
             }
             catch (UnauthorizedAccessException e)
             {
-                return NotFound(new { message = e.Message });
-            }
-            catch (ResourceNotFoundException e)
-            {
-                return NotFound(new { message = e.Message });
+                return Unauthorized(new ErrorResponseDTO(401, e.Message));
             }
         }
     }
