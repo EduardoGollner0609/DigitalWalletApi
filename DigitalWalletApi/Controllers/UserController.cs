@@ -69,12 +69,12 @@ namespace DigitalWalletApi.Controllers
 
         [Authorize]
         [HttpPut("deposit")]
-        public async Task<ActionResult<UserMinDTO>> Deposit([FromBody] DepositDTO deposit)
+        public async Task<ActionResult<UserMinDTO>> Deposit([FromBody] AmountDTO dto)
         {
             try
             {
                 UserMinDTO user = await _userService.GetMe();
-                user = await _walletService.Deposit(user, deposit);
+                user = await _walletService.Deposit(null, user.Id, dto.Amount);
                 return Ok(user);
             }
             catch (Exception e) when (e is UnauthorizedAccessException || e is ResourceNotFoundException)

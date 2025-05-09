@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DigitalWalletApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5ae52ec26d5c7e647d69d8e8c295dafcc334bcc7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b376b727f74dcf5a82e5d710a3b14d069fa6097e")]
 [assembly: System.Reflection.AssemblyProductAttribute("DigitalWalletApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DigitalWalletApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

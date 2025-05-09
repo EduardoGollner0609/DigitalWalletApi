@@ -1,6 +1,8 @@
 ﻿using DigitalWalletApi.Domain.Entities;
 using DigitalWalletApi.DTOs.Entities;
 using DigitalWalletApi.Infra.Repositories.Abstractions;
+using DigitalWalletApi.Services.Exceptions;
+using Microsoft.EntityFrameworkCore;
 
 namespace DigitalWalletApi.Services
 {
@@ -15,9 +17,16 @@ namespace DigitalWalletApi.Services
 
         public async Task<TransferDTO> CreateAsync(TransferDTO dto)
         {
-            Transfer transfer = InstantiateTransferByDTO(dto);
-            await _repository.CreateAsync(transfer);
-            return new TransferDTO(transfer);
+            try
+            {
+                Transfer transfer = InstantiateTransferByDTO(dto);
+                transfer = await _repository.CreateAsync(transfer);
+                return new TransferDTO(transfer);
+            }
+            catch (DbUpdateException e)
+            {
+                throw new CreateEntityException("Erro ao criar transferência.");
+            }
         }
 
         private Transfer InstantiateTransferByDTO(TransferDTO dto)

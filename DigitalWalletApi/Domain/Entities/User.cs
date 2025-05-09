@@ -44,8 +44,9 @@ namespace DigitalWalletApi.Domain.Entities
         {
             if (amount > Balance)
             {
-                Balance = amount;
+                throw new ArgumentException("O valor é muito alto.");
             }
+            Balance -= amount;
         }
 
         public void AddTransferSent(Transfer transfer)

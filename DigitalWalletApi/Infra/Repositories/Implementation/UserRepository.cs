@@ -34,6 +34,12 @@ namespace DigitalWalletApi.Infra.Repositories.Implementation
                 );
         }
 
+        public async Task<User> FindByIdAsync(Guid id)
+        {
+            return await _context.Users.
+                FirstOrDefaultAsync(u => u.Id == id);
+        }
+
         public async Task<User> UpdateAsync(User user)
         {
             _context.Users.Update(user);

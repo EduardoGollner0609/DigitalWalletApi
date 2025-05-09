@@ -1,44 +1,42 @@
 ﻿using DigitalWalletApi.Domain.Entities;
 using DigitalWalletApi.DTOs.Abstractions;
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
+
 namespace DigitalWalletApi.DTOs.Entities
 {
     public class TransferDTO : EntityDTO
     {
-        [Required(ErrorMessage = "É necessário informar quem está realizando a transação.")]
-        public Guid SenderId { get; set; }
+        public Guid SenderId { get; private set; }
 
-        public UserDTO? Sender { get; set; }
+        public UserMinDTO Sender { get; private set; }
 
-        [Required(ErrorMessage = "É necessário informar quem está recebendo a transação.")]
-        public Guid ReceiverId { get; set; }
-        public UserDTO? Receiver { get; set; }
+        public Guid ReceiverId { get; private set; }
+        public UserMinDTO Receiver { get; private set; }
 
         [Required(ErrorMessage = "O valor deve ser informado.")]
         public decimal Amount { get; private set; }
 
-        public DateTime Moment { get; set; }
+        public DateTime Moment { get; private set; }
 
         public TransferDTO() { }
 
-        [JsonConstructor]
-        public TransferDTO(Guid id, Guid senderId, Guid receiverId, decimal amount)
+        public TransferDTO(Guid senderId, Guid receiverId, decimal amount, DateTime moment)
         {
             SenderId = senderId;
             ReceiverId = receiverId;
-            Moment = DateTime.UtcNow;
             Amount = amount;
+            Moment = moment;
         }
 
         public TransferDTO(Transfer transfer)
         {
+            base.Id = transfer.Id;
             SenderId = transfer.SenderId;
             ReceiverId = transfer.ReceiverId;
             Moment = transfer.Moment;
             Amount = transfer.Amount;
-            Sender = new UserDTO(transfer.Sender);
-            Receiver = new UserDTO(transfer.Receiver);
+            Sender = new UserMinDTO(transfer.Sender);
+            Receiver = new UserMinDTO(transfer.Receiver);
         }
     }
 }

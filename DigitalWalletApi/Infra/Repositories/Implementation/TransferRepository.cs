@@ -19,7 +19,10 @@ namespace DigitalWalletApi.Infra.Repositories.Implementation
         {
             await _context.Transfers.AddAsync(entity);
             await _context.SaveChangesAsync();
-            return await _context.Transfers.Include(t => t.Sender).Include(t => t.Receiver).FirstOrDefaultAsync(t => t.Id == entity.Id);
+            return await _context.Transfers
+                .Include(t => t.Sender)
+                .Include(t => t.Receiver)
+                .FirstOrDefaultAsync(t => t.Id == entity.Id);
         }
     }
 }
