@@ -12,10 +12,12 @@ namespace DigitalWalletApi.Controllers
     public class UserController : ControllerBase
     {
         private readonly UserService _userService;
+        private readonly WalletService _walletService;
 
-        public UserController(UserService userService)
+        public UserController(UserService userService, WalletService walletService)
         {
             _userService = userService;
+            _walletService = walletService;
         }
 
         [HttpPost]
@@ -53,9 +55,40 @@ namespace DigitalWalletApi.Controllers
         [HttpGet("balance")]
         public async Task<ActionResult<double>> GetMyBalance()
         {
-            UserMinDTO user = await _userService.GetMe();
-            decimal balance = user.Balance;
-            return Ok(balance);
+            try
+            {
+                UserMinDTO user = await _userService.GetMe();
+                decimal balance = user.Balance;
+                return Ok(balance);
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                return Unauthorized(new ErrorResponseDTO(401, e.Message));
+            }
+        }
+
+        [Authorize]
+        [HttpPut("deposit")]
+        public async Task<ActionResult<UserMinDTO>> Deposit([FromBody] DepositDTO deposit)
+        {
+            try
+            {
+                UserMinDTO user = await _userService.GetMe();
+                user = await _walletService.Deposit(user, deposit);
+                return Ok(user);
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                return Unauthorized(new ErrorResponseDTO(401, e.Message));
+            }
+            catch (ResourceNotFoundException e)
+            {
+                return Unauthorized(new ErrorResponseDTO(401, e.Message));
+            }
+            catch (ArgumentException e)
+            {
+                return BadRequest(new ErrorResponseDTO(400, e.Message));
+            }
         }
     }
 }

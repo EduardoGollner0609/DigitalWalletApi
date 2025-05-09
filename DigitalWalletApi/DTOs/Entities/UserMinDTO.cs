@@ -18,5 +18,10 @@ namespace DigitalWalletApi.DTOs.Entities
             Email = user.Email;
             Balance = user.Balance;
         }
+
+        public void Deposit(decimal amount)
+        {
+            Balance += amount;
+        }
     }
 }

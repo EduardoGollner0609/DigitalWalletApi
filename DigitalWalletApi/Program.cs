@@ -30,7 +30,8 @@ namespace DigitalWalletApi
             builder.Services.AddScoped<AuthService>();
             builder.Services.AddScoped<TransferService>();
             builder.Services.AddScoped<PasswordHasher<User>>();
-   
+            builder.Services.AddScoped<WalletService>();
+
             var app = builder.Build();
 
             if (app.Environment.IsDevelopment())
