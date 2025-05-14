@@ -1,6 +1,6 @@
 ﻿namespace DigitalWallet.Application.UseCases.DTOs.Abstractions
 {
-    public abstract class EntityDTO
+    public abstract class EntityResponseDTO
     {
         public Guid Id { get; protected set; }
     }

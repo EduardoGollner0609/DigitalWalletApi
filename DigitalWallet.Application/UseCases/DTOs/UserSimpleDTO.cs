@@ -3,7 +3,7 @@ using DigitalWallet.Application.UseCases.DTOs.Abstractions;
 
 namespace DigitalWallet.Application.UseCases.DTOs
 {
-    public class UserSimpleDTO : EntityDTO
+    public class UserSimpleDTO : EntityResponseDTO
     {
         public string Name { get; private set; }
         public string Email { get; private set; }

@@ -3,7 +3,7 @@ using DigitalWallet.Domain.Domain.Entities.Enums;
 
 namespace DigitalWallet.Application.UseCases.User.Commands.CreateUser
 {
-    public class CreateUserCommand : EntityDTO
+    public class CreateUserCommand : EntityResponseDTO
     {
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
