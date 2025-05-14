@@ -6,8 +6,8 @@ namespace DigitalWallet.Infrastructure.Data
 {
     public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
     {
-        DbSet<User> Users { get; set; }
-        DbSet<Transfer> Transfers { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Transfer> Transfers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

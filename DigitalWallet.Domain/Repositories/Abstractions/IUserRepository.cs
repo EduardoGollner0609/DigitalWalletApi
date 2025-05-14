@@ -2,7 +2,7 @@
 
 namespace DigitalWallet.Domain.Repositories.Abstractions
 {
-    public interface IUserRepository : IRepository<Transfer>
+    public interface IUserRepository : IRepository<User>
     {
     }
 }
