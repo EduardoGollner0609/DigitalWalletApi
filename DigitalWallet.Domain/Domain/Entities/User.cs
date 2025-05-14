@@ -15,15 +15,15 @@ namespace DigitalWallet.Domain.Domain.Entities
         public List<Transfer> TransfersReceived { get; private set; } = new List<Transfer>();
         public User() { }
 
-        public User(string firstName, string lastName, string email, string password, Role role)
+        public User(Guid id, string firstName, string lastName, string email, string password, Role role, decimal balance)
         {
-            base.Id = Guid.NewGuid();
+            base.Id = id;
             FirstName = firstName;
             LastName = lastName;
             Email = email;
             Password = password;
             Role = role;
-            Balance = 0;
+            Balance = balance;
         }
 
         public void Deposit(decimal amount)

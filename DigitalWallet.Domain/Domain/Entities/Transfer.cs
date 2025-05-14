@@ -13,9 +13,9 @@ namespace DigitalWallet.Domain.Domain.Entities
 
         public Transfer() { }
 
-        public Transfer(Guid senderId, Guid receiverId, decimal amount, DateTime moment)
+        public Transfer(Guid id, Guid senderId, Guid receiverId, decimal amount, DateTime moment)
         {
-            base.Id = Guid.NewGuid();
+            base.Id = id;
             SenderId = senderId;
             ReceiverId = receiverId;
             Amount = amount;

@@ -1,6 +1,7 @@
 ﻿using DigitalWallet.Domain.Domain.Entities;
 using DigitalWallet.Domain.Repositories.Abstractions;
 using DigitalWallet.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace DigitalWallet.Infrastructure.Repositories.Implementation
 {
@@ -18,6 +19,11 @@ namespace DigitalWallet.Infrastructure.Repositories.Implementation
             await _context.Users.AddAsync(entity);
             await _context.SaveChangesAsync();
             return entity;
+        }
+
+        public async Task<bool> ExistsByEmail(string email)
+        {
+            return await _context.Users.AnyAsync(u => u.Email == email);
         }
     }
 }
