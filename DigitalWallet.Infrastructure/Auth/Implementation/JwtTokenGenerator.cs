@@ -24,6 +24,7 @@ namespace DigitalWallet.Infrastructure.Auth.Implementation
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
+                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                     new Claim(ClaimTypes.Name, user.Email.ToString()),
                     new Claim(ClaimTypes.Role, user.Role.ToString())
                 }),

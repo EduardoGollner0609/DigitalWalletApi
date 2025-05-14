@@ -1,0 +1,12 @@
+C:\Projects\DigitalWallet\DigitalWallet.Domain\bin\Debug\net8.0\DigitalWallet.Domain.deps.json
+C:\Projects\DigitalWallet\DigitalWallet.Domain\bin\Debug\net8.0\DigitalWallet.Domain.dll
+C:\Projects\DigitalWallet\DigitalWallet.Domain\bin\Debug\net8.0\DigitalWallet.Domain.pdb
+C:\Projects\DigitalWallet\DigitalWallet.Domain\obj\Debug\net8.0\DigitalWallet.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\DigitalWallet\DigitalWallet.Domain\obj\Debug\net8.0\DigitalWallet.Domain.AssemblyInfoInputs.cache
+C:\Projects\DigitalWallet\DigitalWallet.Domain\obj\Debug\net8.0\DigitalWallet.Domain.AssemblyInfo.cs
+C:\Projects\DigitalWallet\DigitalWallet.Domain\obj\Debug\net8.0\DigitalWallet.Domain.csproj.CoreCompileInputs.cache
+C:\Projects\DigitalWallet\DigitalWallet.Domain\obj\Debug\net8.0\DigitalWallet.Domain.sourcelink.json
+C:\Projects\DigitalWallet\DigitalWallet.Domain\obj\Debug\net8.0\DigitalWallet.Domain.dll
+C:\Projects\DigitalWallet\DigitalWallet.Domain\obj\Debug\net8.0\refint\DigitalWallet.Domain.dll
+C:\Projects\DigitalWallet\DigitalWallet.Domain\obj\Debug\net8.0\DigitalWallet.Domain.pdb
+C:\Projects\DigitalWallet\DigitalWallet.Domain\obj\Debug\net8.0\ref\DigitalWallet.Domain.dll

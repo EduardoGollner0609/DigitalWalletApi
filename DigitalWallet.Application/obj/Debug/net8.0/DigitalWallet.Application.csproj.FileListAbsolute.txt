@@ -1,0 +1,6 @@
+C:\Projects\DigitalWallet\DigitalWallet.Application\obj\Debug\net8.0\DigitalWallet.Application.csproj.AssemblyReference.cache
+C:\Projects\DigitalWallet\DigitalWallet.Application\obj\Debug\net8.0\DigitalWallet.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\DigitalWallet\DigitalWallet.Application\obj\Debug\net8.0\DigitalWallet.Application.AssemblyInfoInputs.cache
+C:\Projects\DigitalWallet\DigitalWallet.Application\obj\Debug\net8.0\DigitalWallet.Application.AssemblyInfo.cs
+C:\Projects\DigitalWallet\DigitalWallet.Application\obj\Debug\net8.0\DigitalWallet.Application.csproj.CoreCompileInputs.cache
+C:\Projects\DigitalWallet\DigitalWallet.Application\obj\Debug\net8.0\DigitalWallet.Application.sourcelink.json

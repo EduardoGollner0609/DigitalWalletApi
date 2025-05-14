@@ -10,9 +10,10 @@ namespace DigitalWallet.Application.UseCases.User.CreateUser
         private readonly IUserRepository _userRepository;
         private readonly IPasswordHasher _passwordHasher;
 
-        public CreateUserHandler(IUserRepository userRepository)
+        public CreateUserHandler(IUserRepository userRepository, IPasswordHasher passwordHasher)
         {
             _userRepository = userRepository;
+            _passwordHasher = passwordHasher;
         }
 
         public async Task<CreateUserResponse> HandleAsync(CreateUserCommand command)
