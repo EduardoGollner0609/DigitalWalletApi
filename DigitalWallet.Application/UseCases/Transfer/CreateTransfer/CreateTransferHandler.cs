@@ -9,8 +9,6 @@ namespace DigitalWallet.Application.UseCases.Transfer.CreateTransfer
         private readonly ITransferRepository _trasnferRepository;
         private readonly IUserRepository _userRepository;
 
-
-
         public CreateTransferHandler(IUserRepository userRepository, ITransferRepository trasnferRepository)
         {
             _userRepository = userRepository;
@@ -37,10 +35,10 @@ namespace DigitalWallet.Application.UseCases.Transfer.CreateTransfer
 
         private async Task<bool> VerifyExistsUsers(Guid senderId, Guid receiverId)
         {
-            if (await _userRepository.ExistsById(senderId))
+            if (await _userRepository.ExistsByIdAsync(senderId))
                 return false;
 
-            if (await _userRepository.ExistsById(receiverId))
+            if (await _userRepository.ExistsByIdAsync(receiverId))
                 return false;
 
             return true;

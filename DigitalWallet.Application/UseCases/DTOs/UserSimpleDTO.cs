@@ -7,14 +7,12 @@ namespace DigitalWallet.Application.UseCases.DTOs
     {
         public string Name { get; private set; }
         public string Email { get; private set; }
-        public decimal Balance { get; private set; }
 
         public UserSimpleDTO(UserModel user)
         {
             base.Id = user.Id;
             Name = $"{user.FirstName} {user.LastName}";
             Email = user.Email;
-            Balance = user.Balance;
         }
     }
 }
