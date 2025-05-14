@@ -2,7 +2,7 @@
 using DigitalWallet.Application.UseCases.Abstractions;
 using DigitalWallet.Domain.Repositories.Abstractions;
 
-namespace DigitalWallet.Application.UseCases.Auth.Login
+namespace DigitalWallet.Application.UseCases.Auth.Queries.Login
 {
     public class LoginHandler
     {
@@ -17,14 +17,14 @@ namespace DigitalWallet.Application.UseCases.Auth.Login
             _tokenService = tokenService;
         }
 
-        public async Task<LoginResponse> HandleAsync(LoginCommand command)
+        public async Task<LoginResponse> HandleAsync(LoginQuery query)
         {
-            UserModel user = await _userRepository.FindByEmailAsync(command.Email);
+            UserModel user = await _userRepository.FindByEmailAsync(query.Email);
 
             if (user == null)
                 throw new UnauthorizedAccessException("Credenciais inválidas!");
 
-            if (_passwordHasher.Verify(command.Password, user.Password))
+            if (_passwordHasher.Verify(query.Password, user.Password))
                 throw new UnauthorizedAccessException("Credenciais inválidas!");
 
             string token = _tokenService.GetToken(user);

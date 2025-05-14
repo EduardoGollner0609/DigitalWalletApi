@@ -2,7 +2,7 @@
 using DigitalWallet.Application.UseCases.DTOs;
 using DigitalWallet.Domain.Domain.Entities.Enums;
 
-namespace DigitalWallet.Application.UseCases.Auth.Login
+namespace DigitalWallet.Application.UseCases.Auth.Queries.Login
 {
     public class LoginResponse
     {

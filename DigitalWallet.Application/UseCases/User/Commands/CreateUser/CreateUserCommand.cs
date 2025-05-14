@@ -1,7 +1,7 @@
 ﻿using DigitalWallet.Application.UseCases.DTOs.Abstractions;
 using DigitalWallet.Domain.Domain.Entities.Enums;
 
-namespace DigitalWallet.Application.UseCases.User.CreateUser
+namespace DigitalWallet.Application.UseCases.User.Commands.CreateUser
 {
     public class CreateUserCommand : EntityDTO
     {
@@ -14,7 +14,7 @@ namespace DigitalWallet.Application.UseCases.User.CreateUser
 
         public CreateUserCommand(string firstName, string lastName, string email, string password)
         {
-            base.Id = Guid.NewGuid();
+            Id = Guid.NewGuid();
             FirstName = firstName;
             LastName = lastName;
             Email = email;

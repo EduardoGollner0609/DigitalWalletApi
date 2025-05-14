@@ -3,7 +3,7 @@ using DigitalWallet.Application.UseCases.Exceptions;
 using DigitalWallet.Domain.Repositories.Abstractions;
 using DigitalWallet.Application.UseCases.Abstractions;
 
-namespace DigitalWallet.Application.UseCases.User.CreateUser
+namespace DigitalWallet.Application.UseCases.User.Commands.CreateUser
 {
     public class CreateUserHandler
     {

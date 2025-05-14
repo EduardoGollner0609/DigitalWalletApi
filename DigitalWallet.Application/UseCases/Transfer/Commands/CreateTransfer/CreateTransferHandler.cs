@@ -2,7 +2,7 @@
 using DigitalWallet.Application.UseCases.Exceptions;
 using DigitalWallet.Domain.Repositories.Abstractions;
 
-namespace DigitalWallet.Application.UseCases.Transfer.CreateTransfer
+namespace DigitalWallet.Application.UseCases.Transfer.Commands.CreateTransfer
 {
     public class CreateTransferHandler
     {
@@ -17,7 +17,7 @@ namespace DigitalWallet.Application.UseCases.Transfer.CreateTransfer
 
         public async Task<CreateTransferResponse> HandleAsync(CreateTransferCommand command)
         {
-            if (!(await VerifyExistsUsers(command.SenderId, command.ReceiverId)))
+            if (!await VerifyExistsUsers(command.SenderId, command.ReceiverId))
                 throw new ResourceNotFoundException("Erro ao transferir: Usuário não foi encontrado!");
 
             TransferModel transfer = new(

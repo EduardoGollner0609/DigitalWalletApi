@@ -1,6 +1,6 @@
 ﻿using DigitalWallet.Application.UseCases.DTOs.Abstractions;
 
-namespace DigitalWallet.Application.UseCases.Transfer.CreateTransfer
+namespace DigitalWallet.Application.UseCases.Transfer.Commands.CreateTransfer
 {
     public class CreateTransferCommand : EntityDTO
     {
@@ -13,7 +13,7 @@ namespace DigitalWallet.Application.UseCases.Transfer.CreateTransfer
 
         public CreateTransferCommand(Guid senderId, Guid receiverId, decimal amount)
         {
-            base.Id = Guid.NewGuid();
+            Id = Guid.NewGuid();
             SenderId = senderId;
             ReceiverId = receiverId;
             Amount = amount;
