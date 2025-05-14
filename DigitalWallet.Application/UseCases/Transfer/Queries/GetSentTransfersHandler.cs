@@ -18,7 +18,7 @@ namespace DigitalWallet.Application.UseCases.Transfer.Queries
         public async Task<List<TransferSimpleDTO>> HandleAsync(GetSentTransfersQuery query)
         {
             List<TransferModel> transfers = await _trasnferRepository
-                .FindSentTransfersByUserId(query.UserId, query.MinDate, query.MaxDate);
+                .FindSentTransfersByUserId(query.UserId, query.MinDate, query.MaxDate, query.Page, query.PageSize);
             return transfers.Select(t => new TransferSimpleDTO(t)).ToList();
         }
     }

@@ -24,7 +24,7 @@ namespace DigitalWallet.Infrastructure.Repositories.Implementation
                 .FirstOrDefaultAsync(t => t.Id == entity.Id);
         }
 
-        public async Task<List<Transfer>> FindSentTransfersByUserId(Guid userId, DateTime? minDate, DateTime? maxDate)
+        public async Task<List<Transfer>> FindSentTransfersByUserId(Guid userId, DateTime? minDate, DateTime? maxDate, int page, int pageSize)
         {
             var query = _context.Transfers
                 .Where(t => t.SenderId == userId);
@@ -42,6 +42,11 @@ namespace DigitalWallet.Infrastructure.Repositories.Implementation
                 maxDate = maxDate.Value.ToUniversalTime();
                 query = query.Where(t => t.Moment <= maxDate.Value);
             }
+
+            query = query
+                .OrderByDescending(t => t.Moment)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize);
 
             return await query
             .Include(t => t.Sender)
