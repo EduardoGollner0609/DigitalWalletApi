@@ -11,12 +11,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("DigitalWallet.Domain")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("DigitalWallet.Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f822de0d515a13c98a2a0e29e966a87e514231c3")]
-[assembly: System.Reflection.AssemblyProductAttribute("DigitalWallet.Domain")]
-[assembly: System.Reflection.AssemblyTitleAttribute("DigitalWallet.Domain")]
+[assembly: System.Reflection.AssemblyProductAttribute("DigitalWallet.Web")]
+[assembly: System.Reflection.AssemblyTitleAttribute("DigitalWallet.Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
 // Gerado pela classe WriteCodeFragment do MSBuild.

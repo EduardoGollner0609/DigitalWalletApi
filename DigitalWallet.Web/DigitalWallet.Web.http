@@ -1,0 +1,6 @@
+@DigitalWallet.Web_HostAddress = http://localhost:5239
+
+GET {{DigitalWallet.Web_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
