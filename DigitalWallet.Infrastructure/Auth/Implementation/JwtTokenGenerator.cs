@@ -1,4 +1,5 @@
-﻿using DigitalWallet.Domain.Domain.Entities;
+﻿using DigitalWallet.Application.UseCases.Abstractions;
+using DigitalWallet.Domain.Domain.Entities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace DigitalWallet.Infrastructure.Auth.Implementation
 {
-    public class JwtTokenGenerator
+    public class JwtTokenGenerator : ITokenService
     {
         private readonly string _secret;
 

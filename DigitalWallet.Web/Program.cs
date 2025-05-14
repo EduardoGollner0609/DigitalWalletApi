@@ -18,6 +18,8 @@ namespace DigitalWallet.Web
 
             builder.Services.AddAuthConfigurarion(builder.Configuration);
 
+            builder.Services.AddInfrastructure();
+
             var app = builder.Build();
 
             if (app.Environment.IsDevelopment())
