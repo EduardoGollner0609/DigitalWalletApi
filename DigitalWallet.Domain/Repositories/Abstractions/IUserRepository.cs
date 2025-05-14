@@ -6,7 +6,7 @@ namespace DigitalWallet.Domain.Repositories.Abstractions
     {
         Task<bool> ExistsByEmail(string email);
         Task<User> FindByIdAsync(Guid id);
-        Task<bool> ExistsByIdAsync(Guid id);
         Task<User> FindByEmailAsync(string email);
+        Task<User> UpdateAsync(User user);
     }
 }

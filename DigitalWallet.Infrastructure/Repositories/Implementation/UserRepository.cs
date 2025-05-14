@@ -32,13 +32,6 @@ namespace DigitalWallet.Infrastructure.Repositories.Implementation
                 .AnyAsync(u => u.Email == email);
         }
 
-        public async Task<bool> ExistsByIdAsync(Guid id)
-        {
-            return await _context
-                .Users
-                .AnyAsync(u => u.Id == id);
-        }
-
         public async Task<User> FindByIdAsync(Guid id)
         {
             return await _context
@@ -51,6 +44,13 @@ namespace DigitalWallet.Infrastructure.Repositories.Implementation
             return await _context
                 .Users
                 .FirstOrDefaultAsync(u => u.Email == email);
+        }
+
+        public async Task<User> UpdateAsync(User user)
+        {
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
+            return user;
         }
     }
 }

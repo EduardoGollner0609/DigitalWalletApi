@@ -21,7 +21,7 @@ namespace DigitalWallet.Application.UseCases.Wallet.Queries.GetBalance
             if (user == null)
                 throw new ResourceNotFoundException("Erro ao consultar saldo: Usuário não foi encontrado!");
 
-            return new GetBalanceQuery(user);
+            return new GetBalanceResponse(user);
         }
     }
 }
