@@ -1,6 +1,8 @@
 ﻿using DigitalWallet.Application.UseCases.Exceptions;
 using DigitalWallet.Application.UseCases.Transfer.Commands.CreateTransfer;
 using DigitalWallet.Web.DTOs;
+using DigitalWallet.Web.DTOs.Inserts;
+using DigitalWallet.Web.DTOs.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -20,7 +22,7 @@ namespace DigitalWallet.Web.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<ActionResult> CreateTransferAsync([FromBody] TransferInsertDTO dto)
+        public async Task<ActionResult<TransferSimpleDTO>> CreateTransferAsync([FromBody] TransferInsertDTO dto)
         {
             try
             {

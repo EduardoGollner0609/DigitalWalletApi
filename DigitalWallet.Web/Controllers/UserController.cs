@@ -1,6 +1,7 @@
 ﻿using DigitalWallet.Application.UseCases.Exceptions;
 using DigitalWallet.Application.UseCases.User.Commands.CreateUser;
-using DigitalWallet.Web.DTOs;
+using DigitalWallet.Web.DTOs.Inserts;
+using DigitalWallet.Web.DTOs.Responses;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DigitalWallet.Web.Controllers

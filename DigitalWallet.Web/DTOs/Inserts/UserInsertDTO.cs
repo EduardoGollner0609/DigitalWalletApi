@@ -1,7 +1,7 @@
 ﻿using DigitalWallet.Domain.Domain.Entities.Enums;
 using System.ComponentModel.DataAnnotations;
 
-namespace DigitalWallet.Web.DTOs
+namespace DigitalWallet.Web.DTOs.Inserts
 {
     public class UserInsertDTO
     {

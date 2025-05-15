@@ -21,16 +21,5 @@ namespace DigitalWallet.Domain.Domain.Entities
             Amount = amount;
             Moment = moment;
         }
-
-        public Transfer(Guid id, User sender, User receiver, decimal amount, DateTime moment)
-        {
-            base.Id = id;
-            Sender = sender;
-            Receiver = receiver;
-            SenderId = sender.Id;
-            ReceiverId = receiver.Id;
-            Amount = amount;
-            Moment = moment;
-        }
     }
 }
