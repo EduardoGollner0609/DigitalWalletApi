@@ -19,17 +19,24 @@ namespace DigitalWallet.Web.Controllers
         [HttpPost]
         public async Task<ActionResult<AuthenticatedDTO>> LoginAsync([FromBody] CredentialsDTO credentials)
         {
-            var command = new LoginQuery(credentials.Email, credentials.Password);
-            var response = await _loginHandler.HandleAsync(command);
+            try
+            {
+                var query = new LoginQuery(credentials.Email, credentials.Password);
+                var response = await _loginHandler.HandleAsync(query);
 
-            AuthenticatedDTO user = new AuthenticatedDTO(
-                new UserSimpleDTO(
-                    response.User.Id,
-                response.User.Name, response.User.Email),
-                response.Role,
-                response.Token);
+                AuthenticatedDTO user = new AuthenticatedDTO(
+                    new UserSimpleDTO(
+                        response.User.Id,
+                    response.User.Name, response.User.Email),
+                    response.Role,
+                    response.Token);
 
-            return Ok(user);
+                return Ok(user);
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                return Unauthorized(e.Message);
+            }
         }
     }
 }
