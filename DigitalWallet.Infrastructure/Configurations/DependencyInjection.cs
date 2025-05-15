@@ -1,5 +1,4 @@
 ﻿using DigitalWallet.Application.UseCases.Abstractions;
-using DigitalWallet.Application.UseCases.User.Commands.CreateUser;
 using DigitalWallet.Domain.Repositories.Abstractions;
 using DigitalWallet.Infrastructure.Auth.Implementation;
 using DigitalWallet.Infrastructure.Repositories.Implementation;
@@ -16,7 +15,6 @@ namespace DigitalWallet.Infrastructure.Configurations
                 services.AddScoped<ITransferRepository, TransferRepository>();
                 services.AddScoped<ITokenService, JwtTokenGenerator>();
                 services.AddScoped<IPasswordHasher, BCryptPasswordHasher>();
-                services.AddScoped<CreateUserHandler>();
             }
         }
     }

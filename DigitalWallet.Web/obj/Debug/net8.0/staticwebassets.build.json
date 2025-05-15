@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "7ERtujjEz+/sNtnSaxzAA9/ystBS2Qoq3WWw8pv7Aks=",
+  "Source": "DigitalWallet.Web",
+  "BasePath": "_content/DigitalWallet.Web",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

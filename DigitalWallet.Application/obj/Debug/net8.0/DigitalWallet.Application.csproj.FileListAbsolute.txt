@@ -1,6 +1,16 @@
+C:\Projects\DigitalWallet\DigitalWallet.Application\bin\Debug\net8.0\DigitalWallet.Application.deps.json
+C:\Projects\DigitalWallet\DigitalWallet.Application\bin\Debug\net8.0\DigitalWallet.Application.dll
+C:\Projects\DigitalWallet\DigitalWallet.Application\bin\Debug\net8.0\DigitalWallet.Application.pdb
+C:\Projects\DigitalWallet\DigitalWallet.Application\bin\Debug\net8.0\DigitalWallet.Domain.dll
+C:\Projects\DigitalWallet\DigitalWallet.Application\bin\Debug\net8.0\DigitalWallet.Domain.pdb
 C:\Projects\DigitalWallet\DigitalWallet.Application\obj\Debug\net8.0\DigitalWallet.Application.csproj.AssemblyReference.cache
 C:\Projects\DigitalWallet\DigitalWallet.Application\obj\Debug\net8.0\DigitalWallet.Application.GeneratedMSBuildEditorConfig.editorconfig
 C:\Projects\DigitalWallet\DigitalWallet.Application\obj\Debug\net8.0\DigitalWallet.Application.AssemblyInfoInputs.cache
 C:\Projects\DigitalWallet\DigitalWallet.Application\obj\Debug\net8.0\DigitalWallet.Application.AssemblyInfo.cs
 C:\Projects\DigitalWallet\DigitalWallet.Application\obj\Debug\net8.0\DigitalWallet.Application.csproj.CoreCompileInputs.cache
 C:\Projects\DigitalWallet\DigitalWallet.Application\obj\Debug\net8.0\DigitalWallet.Application.sourcelink.json
+C:\Projects\DigitalWallet\DigitalWallet.Application\obj\Debug\net8.0\DigitalW.607386BF.Up2Date
+C:\Projects\DigitalWallet\DigitalWallet.Application\obj\Debug\net8.0\DigitalWallet.Application.dll
+C:\Projects\DigitalWallet\DigitalWallet.Application\obj\Debug\net8.0\refint\DigitalWallet.Application.dll
+C:\Projects\DigitalWallet\DigitalWallet.Application\obj\Debug\net8.0\DigitalWallet.Application.pdb
+C:\Projects\DigitalWallet\DigitalWallet.Application\obj\Debug\net8.0\ref\DigitalWallet.Application.dll

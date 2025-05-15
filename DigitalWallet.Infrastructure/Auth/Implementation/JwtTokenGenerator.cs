@@ -14,7 +14,7 @@ namespace DigitalWallet.Infrastructure.Auth.Implementation
 
         public JwtTokenGenerator(IConfiguration configuration)
         {
-            _secret = configuration["JwtSettings:SecretKey"];
+            _secret = configuration.GetValue<string>("JwtSettings:Secret");
         }
 
         public string GetToken(User user)

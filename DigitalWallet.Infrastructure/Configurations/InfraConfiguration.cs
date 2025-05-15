@@ -20,7 +20,7 @@ namespace DigitalWallet.Infrastructure.Configurations
 
         public static void AddAuthConfigurarion(this IServiceCollection services, IConfiguration configuration)
         {
-            var key = Encoding.ASCII.GetBytes(configuration["JwtSettings:SecretKey"]);
+            var key = Encoding.ASCII.GetBytes(configuration.GetValue<string>("JwtSettings:Secret"));
 
             services.AddAuthentication(x =>
             {

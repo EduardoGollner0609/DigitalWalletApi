@@ -22,7 +22,7 @@ namespace DigitalWallet.Web.Controllers
         {
             try
             {
-                var command = new CreateUserCommand(dto.FirstName, dto.LastName, dto.Email, dto.Password)
+                var command = new CreateUserCommand(dto.FirstName, dto.LastName, dto.Email, dto.Password);
                 var response = await _createUserHandler.HandleAsync(command);
 
                 UserSimpleDTO user = new(response.Id, response.Name, response.Email);

@@ -1,0 +1,39 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "DigitalWallet.Application/1.0.0": {
+        "dependencies": {
+          "DigitalWallet.Domain": "1.0.0"
+        },
+        "runtime": {
+          "DigitalWallet.Application.dll": {}
+        }
+      },
+      "DigitalWallet.Domain/1.0.0": {
+        "runtime": {
+          "DigitalWallet.Domain.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "DigitalWallet.Application/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "DigitalWallet.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

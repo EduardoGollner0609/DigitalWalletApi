@@ -1,4 +1,4 @@
-﻿using DigitalWallet.Web.DTOs.Abstractions
+﻿using DigitalWallet.Web.DTOs.Abstractions;
 
 
 namespace DigitalWallet.Web.DTOs.Responses
