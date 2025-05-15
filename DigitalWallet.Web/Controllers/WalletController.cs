@@ -1,6 +1,8 @@
-﻿using DigitalWallet.Application.UseCases.Exceptions;
+﻿using DigitalWallet.Application.UseCases.DTOs.Abstractions;
+using DigitalWallet.Application.UseCases.Exceptions;
 using DigitalWallet.Application.UseCases.Wallet.Commands.Deposit;
 using DigitalWallet.Application.UseCases.Wallet.Queries.GetBalance;
+using DigitalWallet.Web.DTOs.Inserts;
 using DigitalWallet.Web.DTOs.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -24,7 +26,7 @@ namespace DigitalWallet.Web.Controllers
 
         [Authorize]
         [HttpGet("balance")]
-        public async Task<ActionResult<UserWithBalanceDTO>> GetBalance()
+        public async Task<ActionResult<UserWithBalanceDTO>> GetBalanceAsync()
         {
             try
             {
@@ -33,12 +35,28 @@ namespace DigitalWallet.Web.Controllers
                 var query = new GetBalanceQuery(userIdAuthenticated);
                 var response = await _getBalanceHandler.HandleAsync(query);
 
-                UserWithBalanceDTO userWithBalance = new UserWithBalanceDTO(
-                    new UserSimpleDTO(
-                        response.User.Id,
-                        response.User.Name,
-                        response.User.Email),
-                    response.Balance);
+                UserWithBalanceDTO userWithBalance = CreateUserWithBalanceDTO(response);
+
+                return Ok(userWithBalance);
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                return Unauthorized(e.Message);
+            }
+        }
+
+        [Authorize]
+        [HttpPut("deposit")]
+        public async Task<ActionResult<UserWithBalanceDTO>> DepositAsync([FromBody] DepositInsertDTO dto)
+        {
+            try
+            {
+                Guid userIdAuthenticated = FindUserIdAuthenticated();
+
+                var command = new DepositCommand(userIdAuthenticated, dto.Amount);
+                var response = await _depositHandler.HandleAsync(command);
+
+                UserWithBalanceDTO userWithBalance = CreateUserWithBalanceDTO(response);
 
                 return Ok(userWithBalance);
 
@@ -47,7 +65,6 @@ namespace DigitalWallet.Web.Controllers
             {
                 return Unauthorized(e.Message);
             }
-
         }
 
         private Guid FindUserIdAuthenticated()
@@ -58,6 +75,16 @@ namespace DigitalWallet.Web.Controllers
                 throw new UnauthorizedAccessException("Erro: Token inválido!");
 
             return userGuid;
+        }
+
+        private UserWithBalanceDTO CreateUserWithBalanceDTO(WalletResponseDTO response)
+        {
+            return new UserWithBalanceDTO(
+                    new UserSimpleDTO(
+                        response.User.Id,
+                        response.User.Name,
+                        response.User.Email),
+                    response.Balance);
         }
     }
 }
