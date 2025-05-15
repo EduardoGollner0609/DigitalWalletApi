@@ -1,6 +1,5 @@
 ﻿using UserModel = DigitalWallet.Domain.Domain.Entities.User;
 using DigitalWallet.Domain.Repositories.Abstractions;
-using DigitalWallet.Application.UseCases.Exceptions;
 
 namespace DigitalWallet.Application.UseCases.Wallet.Queries.GetBalance
 {
@@ -19,7 +18,7 @@ namespace DigitalWallet.Application.UseCases.Wallet.Queries.GetBalance
             UserModel user = await _userRepository.FindByIdAsync(query.UserId);
 
             if (user == null)
-                throw new ResourceNotFoundException("Erro ao consultar saldo: Usuário não foi encontrado!");
+                throw new UnauthorizedAccessException("Erro ao consultar saldo: Token inválido.");
 
             return new GetBalanceResponse(user);
         }
