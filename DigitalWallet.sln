@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalWallet.Infrastructur
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalWallet.Application", "DigitalWallet.Application\DigitalWallet.Application.csproj", "{7E3BD570-73B2-4825-80FC-79A7818EFDCD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitalWallet.Web", "DigitalWallet.Web\DigitalWallet.Web.csproj", "{9D2C9EED-585B-4CA6-96E6-B4E56192F08F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{7E3BD570-73B2-4825-80FC-79A7818EFDCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E3BD570-73B2-4825-80FC-79A7818EFDCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E3BD570-73B2-4825-80FC-79A7818EFDCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D2C9EED-585B-4CA6-96E6-B4E56192F08F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D2C9EED-585B-4CA6-96E6-B4E56192F08F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D2C9EED-585B-4CA6-96E6-B4E56192F08F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D2C9EED-585B-4CA6-96E6-B4E56192F08F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -14,5 +14,11 @@ namespace DigitalWallet.Web.DTOs
             Name = name;
             Email = email;
         }
+        public UserSimpleDTO(User user)
+        {
+            base.Id = user.Id;
+            Name = $"{user.FirstName} {user.LastName}";
+            Email = user.Email;
+        }
     }
 }
