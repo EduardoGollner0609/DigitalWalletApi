@@ -35,6 +35,67 @@ A aplicação foi construída seguindo os princípios da **Clean Architecture**,
 
 ---
 
+## Endpoints da API
+
+Abaixo estão listados os principais endpoints disponíveis na API, suas funcionalidades e requisitos de autenticação.
+
+### 🧑‍💻 Usuário
+
+- **Criar Usuário**
+  - **Método:** `POST`
+  - **Endpoint:** `/api/user`
+  - **Descrição:** Cria um novo usuário no sistema.
+  - **Autenticação:** ❌ Não requer autenticação
+
+- **Login**
+  - **Método:** `POST`
+  - **Endpoint:** `/api/auth/login`
+  - **Descrição:** Realiza o login do usuário e retorna um token JWT para autenticação.
+  - **Autenticação:** ❌ Não requer autenticação
+
+### 💼 Carteira
+
+- **Consultar Saldo**
+  - **Método:** `GET`
+  - **Endpoint:** `/api/wallet/balance`
+  - **Descrição:** Retorna o saldo atual da carteira do usuário autenticado.
+  - **Autenticação:** ✅ Requer token JWT
+
+- **Depositar Valor**
+  - **Método:** `PUT`
+  - **Endpoint:** `/api/wallet/deposit`
+  - **Descrição:** Realiza um depósito na carteira do usuário autenticado.
+  - **Autenticação:** ✅ Requer token JWT
+
+### 🔁 Transferências
+
+- **Criar Transferência**
+  - **Método:** `POST`
+  - **Endpoint:** `/api/transfer`
+  - **Descrição:** Cria uma nova transferência entre usuários.
+  - **Autenticação:** ✅ Requer token JWT
+
+- **Listar Transferências Enviadas**
+  - **Método:** `GET`
+  - **Endpoint:** `/api/transfer/sent`
+  - **Descrição:** Lista todas as transferências enviadas pelo usuário autenticado.
+  - **Autenticação:** ✅ Requer token JWT
+
+- **Listar Todas as Transferências**
+  - **Método:** `GET`
+  - **Endpoint:** `/api/transfer`
+  - **Descrição:** Lista todas as transferências em que o usuário autenticado participou (enviadas e recebidas).
+  - **Autenticação:** ✅ Requer token JWT
+
+### 🔐 Autenticação
+
+Para os endpoints protegidos, é necessário incluir o token JWT no cabeçalho da requisição:
+
+```http
+Authorization: Bearer <seu_token_aqui>
+```
+---
+
 ## 🧑‍💼 Estrutura do Banco de Dados
 
 ### 🧍 Tabela `Users`
@@ -61,16 +122,7 @@ A aplicação foi construída seguindo os princípios da **Clean Architecture**,
 
 ---
 
-## ⚙️ Como Rodar o Projeto
 
-1. Clone o repositório:
-
-```bash
-git clone https://github.com/EduardoGollner0609/DigitalWalletApi.git
-cd DigitalWalletApi
-```
-
----
 
 ## 💾 Populando o Banco de Dados
 
@@ -81,8 +133,6 @@ dotnet ef database update --project DigitalWallet.Infrastructure --startup-proje
 ```
 
 Abaixo estão os comandos SQL para inserir dados de exemplo no banco PostgreSQL. Isso facilita a visualização e testes dos endpoints da API. (🚨🚨Obs: A senha de todos os usuários estäo criptografadas, a senha real é "123456"🚨🚨)
-
----
 
 ### 👤 Inserindo Usuários
 
@@ -209,4 +259,15 @@ INSERT INTO "Transfers" ("Id", "SenderId", "ReceiverId", "Amount", "Moment") VAL
 INSERT INTO "Transfers" ("Id", "SenderId", "ReceiverId", "Amount", "Moment") VALUES ('bd8edd23-d5be-47cd-89de-14fe37f36092', 'cc223c2b-15b1-448f-b755-580462ecf6e7', '6322387c-40b4-4e93-af2c-064da912054e', 497.42, '2025-05-04T12:45:00');
 INSERT INTO "Transfers" ("Id", "SenderId", "ReceiverId", "Amount", "Moment") VALUES ('6c137f5d-a45a-4d5d-a5a6-013fb8abdd6f', 'cc223c2b-15b1-448f-b755-580462ecf6e7', 'aebcb787-76a2-432a-809a-bfec792975f6', 313.22, '2025-05-04T13:30:00');
 INSERT INTO "Transfers" ("Id", "SenderId", "ReceiverId", "Amount", "Moment") VALUES ('47062f19-0a28-45e3-b19f-55e770f5afa9', 'cc223c2b-15b1-448f-b755-580462ecf6e7', '1e37ccf4-f069-48ec-8548-c12f2b5bcae9', 221.8, '2025-05-04T14:15:00');
+```
+
+---
+
+## ⚙️ Como Rodar o Projeto
+
+1. Clone o repositório:
+
+```bash
+git clone https://github.com/EduardoGollner0609/DigitalWalletApi.git
+cd DigitalWalletApi
 ```
