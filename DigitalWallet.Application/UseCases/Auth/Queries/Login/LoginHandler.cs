@@ -24,7 +24,7 @@ namespace DigitalWallet.Application.UseCases.Auth.Queries.Login
             if (user == null)
                 throw new UnauthorizedAccessException("Credenciais inválidas!");
 
-            if (_passwordHasher.Verify(query.Password, user.Password))
+            if (!_passwordHasher.Verify(query.Password, user.Password))
                 throw new UnauthorizedAccessException("Credenciais inválidas!");
 
             string token = _tokenService.GetToken(user);

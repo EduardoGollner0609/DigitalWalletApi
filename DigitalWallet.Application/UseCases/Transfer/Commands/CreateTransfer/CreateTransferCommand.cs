@@ -1,9 +1,9 @@
-﻿using DigitalWallet.Application.UseCases.DTOs.Abstractions;
-
+﻿
 namespace DigitalWallet.Application.UseCases.Transfer.Commands.CreateTransfer
 {
-    public class CreateTransferCommand : EntityResponseDTO
+    public class CreateTransferCommand
     {
+        public Guid Id { get; private set; }
         public Guid SenderId { get; private set; }
         public Guid ReceiverId { get; private set; }
 

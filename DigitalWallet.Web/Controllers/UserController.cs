@@ -30,7 +30,7 @@ namespace DigitalWallet.Web.Controllers
             }
             catch (CreateEntityException e)
             {
-                return BadRequest(e.Message);
+                return BadRequest(new ErrorResponseDTO(400, e.Message, DateTime.Now));
             }
         }
     }

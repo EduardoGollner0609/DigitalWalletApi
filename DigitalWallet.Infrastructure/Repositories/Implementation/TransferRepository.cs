@@ -29,14 +29,44 @@ namespace DigitalWallet.Infrastructure.Repositories.Implementation
             var query = _context.Transfers
                 .Where(t => t.SenderId == userId);
 
-            if (minDate != null)
+            if (minDate.HasValue)
             {
                 Console.WriteLine("MinDate é: " + minDate.ToString());
                 minDate = minDate.Value.ToUniversalTime();
                 query = query.Where(t => t.Moment >= minDate.Value);
             }
 
-            if (maxDate != null)
+            if (maxDate.HasValue)
+            {
+                Console.WriteLine("maxDate é: " + maxDate.ToString());
+                maxDate = maxDate.Value.ToUniversalTime();
+                query = query.Where(t => t.Moment <= maxDate.Value);
+            }
+
+            query = query
+                .OrderByDescending(t => t.Moment)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize);
+
+            return await query
+            .Include(t => t.Sender)
+            .Include(t => t.Receiver)
+            .ToListAsync();
+        }
+
+        public async Task<List<Transfer>> GetTransfers(Guid userId, DateTime? minDate, DateTime? maxDate, int page, int pageSize)
+        {
+            var query = _context.Transfers
+                        .Where(t => t.SenderId == userId || t.ReceiverId == userId);
+
+            if (minDate.HasValue)
+            {
+                Console.WriteLine("MinDate é: " + minDate.ToString());
+                minDate = minDate.Value.ToUniversalTime();
+                query = query.Where(t => t.Moment >= minDate.Value);
+            }
+
+            if (maxDate.HasValue)
             {
                 Console.WriteLine("maxDate é: " + maxDate.ToString());
                 maxDate = maxDate.Value.ToUniversalTime();

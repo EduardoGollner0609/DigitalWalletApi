@@ -11,8 +11,6 @@ namespace DigitalWallet.Web.DTOs.Inserts
         [Required(ErrorMessage = "Senha é obrigatória")]
         public string Password { get; private set; }
 
-        public CredentialsDTO() { }
-
         public CredentialsDTO(string email, string password)
         {
             Email = email;

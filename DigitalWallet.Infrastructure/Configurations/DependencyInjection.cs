@@ -1,6 +1,8 @@
 ﻿using DigitalWallet.Application.UseCases.Abstractions;
+using DigitalWallet.Application.UseCases.Auth.Queries.Login;
 using DigitalWallet.Application.UseCases.Transfer.Commands.CreateTransfer;
 using DigitalWallet.Application.UseCases.Transfer.Queries;
+using DigitalWallet.Application.UseCases.Transfer.Queries.GetSentTranfers;
 using DigitalWallet.Application.UseCases.User.Commands.CreateUser;
 using DigitalWallet.Application.UseCases.Wallet.Commands.Deposit;
 using DigitalWallet.Application.UseCases.Wallet.Queries.GetBalance;
@@ -22,10 +24,12 @@ namespace DigitalWallet.Infrastructure.Configurations
                 services.AddScoped<IPasswordHasher, BCryptPasswordHasher>();
 
                 services.AddScoped<CreateUserHandler>();
+                services.AddScoped<LoginHandler>();
                 services.AddScoped<CreateTransferHandler>();
                 services.AddScoped<GetBalanceHandler>();
                 services.AddScoped<DepositHandler>();
                 services.AddScoped<GetSentTransfersHandler>();
+                services.AddScoped<GetTransfersHandler>();
             }
         }
     }

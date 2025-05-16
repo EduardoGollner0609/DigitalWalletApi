@@ -18,11 +18,18 @@ namespace DigitalWallet.Application.UseCases.Transfer.Commands.CreateTransfer
 
         public async Task<CreateTransferResponse> HandleAsync(CreateTransferCommand command)
         {
+
+            if (command.SenderId == command.ReceiverId)
+                throw new CreateEntityException("Você não pode transferir para si mesmo!");
+
             UserModel sender = await _userRepository.FindByIdAsync(command.SenderId);
             UserModel receiver = await _userRepository.FindByIdAsync(command.ReceiverId);
 
             if (sender == null || receiver == null)
                 throw new ResourceNotFoundException("Erro ao transferir: Usuário não foi encontrado!");
+
+            if (command.Amount <= 0)
+                throw new CreateEntityException("O valor deve ser maior que zero!");
 
             try
             {

@@ -16,7 +16,7 @@ namespace DigitalWallet.Web.Controllers
             _loginHandler = loginHandler;
         }
 
-        [HttpPost]
+        [HttpPost("login")]
         public async Task<ActionResult<AuthenticatedDTO>> LoginAsync([FromBody] CredentialsDTO credentials)
         {
             try
@@ -28,14 +28,14 @@ namespace DigitalWallet.Web.Controllers
                     new UserSimpleDTO(
                         response.User.Id,
                     response.User.Name, response.User.Email),
-                    response.Role,
+                    response.Role.ToString(),
                     response.Token);
 
                 return Ok(user);
             }
             catch (UnauthorizedAccessException e)
             {
-                return Unauthorized(e.Message);
+                return Unauthorized(new ErrorResponseDTO(401, e.Message, DateTime.Now));
             }
         }
     }

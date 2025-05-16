@@ -7,9 +7,8 @@ namespace DigitalWallet.Web.DTOs.Inserts
         [Required(ErrorMessage = "É necessário informar quem está recebendo a transação.")]
         public Guid ReceiverId { get; private set; }
         [Required(ErrorMessage = "O valor deve ser informado.")]
+        [Range(0.1, double.MaxValue, ErrorMessage = "O valor deve ser maior que zero")]
         public decimal Amount { get; private set; }
-
-        public TransferInsertDTO() { }
 
         public TransferInsertDTO(Guid receiverId, decimal amount)
         {

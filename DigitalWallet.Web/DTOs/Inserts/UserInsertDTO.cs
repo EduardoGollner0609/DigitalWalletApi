@@ -23,7 +23,6 @@ namespace DigitalWallet.Web.DTOs.Inserts
         public Role Role { get; private set; }
         public decimal Balance { get; private set; }
 
-        public UserInsertDTO() { }
         public UserInsertDTO(string firstName, string lastName, string email, string password)
         {
             FirstName = firstName;

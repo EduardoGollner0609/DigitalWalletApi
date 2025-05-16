@@ -41,7 +41,7 @@ namespace DigitalWallet.Web.Controllers
             }
             catch (UnauthorizedAccessException e)
             {
-                return Unauthorized(e.Message);
+                return Unauthorized(new ErrorResponseDTO(401, e.Message, DateTime.Now));
             }
         }
 
@@ -63,7 +63,7 @@ namespace DigitalWallet.Web.Controllers
             }
             catch (UnauthorizedAccessException e)
             {
-                return Unauthorized(e.Message);
+                return Unauthorized(new ErrorResponseDTO(400, e.Message, DateTime.Now));
             }
         }
 

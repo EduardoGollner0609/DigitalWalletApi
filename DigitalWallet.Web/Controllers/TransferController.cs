@@ -1,12 +1,13 @@
 ﻿using DigitalWallet.Application.UseCases.Exceptions;
 using DigitalWallet.Application.UseCases.Transfer.Commands.CreateTransfer;
-using DigitalWallet.Application.UseCases.Transfer.Queries;
 using DigitalWallet.Web.DTOs.Inserts;
 using DigitalWallet.Web.DTOs.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TransferSimpleApplicationDTO = DigitalWallet.Application.UseCases.DTOs.TransferSimpleDTO;
 using System.Security.Claims;
+using DigitalWallet.Application.UseCases.Transfer.Queries.GetSentTranfers;
+using DigitalWallet.Application.UseCases.Transfer.Queries;
 
 namespace DigitalWallet.Web.Controllers
 {
@@ -16,11 +17,13 @@ namespace DigitalWallet.Web.Controllers
     {
         private readonly CreateTransferHandler _createTransferHandler;
         private readonly GetSentTransfersHandler _getSentTransfersHandler;
+        private readonly GetTransfersHandler _getTransfersHandler;
 
-        public TransferController(CreateTransferHandler createTransferHandler, GetSentTransfersHandler getSentTransfersHandler)
+        public TransferController(CreateTransferHandler createTransferHandler, GetSentTransfersHandler getSentTransfersHandler, GetTransfersHandler getTransfersHandler)
         {
             _createTransferHandler = createTransferHandler;
             _getSentTransfersHandler = getSentTransfersHandler;
+            _getTransfersHandler = getTransfersHandler;
         }
 
         [Authorize]
@@ -39,21 +42,21 @@ namespace DigitalWallet.Web.Controllers
             }
             catch (CreateEntityException e)
             {
-                return BadRequest(e.Message);
+                return BadRequest(new ErrorResponseDTO(400, e.Message, DateTime.Now));
             }
             catch (UnauthorizedAccessException e)
             {
-                return Unauthorized(e.Message);
+                return Unauthorized(new ErrorResponseDTO(401, e.Message, DateTime.Now));
             }
         }
 
         [Authorize]
         [HttpGet("sent")]
         public async Task<ActionResult<List<TransferSimpleDTO>>> GetSentTransfers(
-            [FromQuery] DateTime minDate,
-            [FromQuery] DateTime maxDate,
-            [FromQuery] int page,
-            [FromQuery] int pageSize)
+            [FromQuery] DateTime? minDate,
+            [FromQuery] DateTime? maxDate,
+            [FromQuery] int? page,
+            [FromQuery] int? pageSize)
         {
             try
             {
@@ -66,7 +69,30 @@ namespace DigitalWallet.Web.Controllers
             }
             catch (UnauthorizedAccessException e)
             {
-                return Unauthorized(e.Message);
+                return Unauthorized(new ErrorResponseDTO(401, e.Message, DateTime.Now));
+            }
+        }
+
+        [Authorize]
+        [HttpGet]
+        public async Task<ActionResult<List<TransferSimpleDTO>>> GetTransfers(
+          [FromQuery] DateTime? minDate,
+          [FromQuery] DateTime? maxDate,
+          [FromQuery] int? page,
+          [FromQuery] int? pageSize)
+        {
+            try
+            {
+                Guid userIdAuthenticated = FindUserIdAuthenticated();
+
+                var query = new GetTransfersQuery(userIdAuthenticated, minDate, maxDate, page, pageSize);
+                var response = await _getTransfersHandler.HandleAsync(query);
+
+                return Ok(response.Select(CreateResponseDTO).ToList());
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                return Unauthorized(new ErrorResponseDTO(401, e.Message, DateTime.Now));
             }
         }
 

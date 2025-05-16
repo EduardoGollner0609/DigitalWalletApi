@@ -6,5 +6,7 @@ namespace DigitalWallet.Domain.Repositories.Abstractions
     {
         Task<List<Transfer>> FindSentTransfersByUserId
             (Guid userId, DateTime? minDate, DateTime? maxDate, int page, int pageSize);
+        Task<List<Transfer>> GetTransfers
+            (Guid userId, DateTime? minDate, DateTime? maxDate, int page, int pageSize);
     }
 }
